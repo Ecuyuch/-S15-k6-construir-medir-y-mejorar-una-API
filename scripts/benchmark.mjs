@@ -82,7 +82,13 @@ file('environment.json',{recorded:new Date().toISOString(),host:JSON.parse(run('
  images:JSON.parse(d(['image','inspect',image,'reservaflowbackend-api','postgres:16-alpine'])),
  compose:d(['compose','config']),otherContainers:d(['ps','--format','{{.Names}} {{.Image}} {{.Status}}']),cache:'Después de cada restauración se sincroniza y descarta caché de archivos WSL; se conservan shared_buffers PG y se calienta 15s. Otros cuatro contenedores detenidos con autorización; dos repeticiones ABBA.'});
 const order=[['v1','load-1'],['v2','load-1'],['v2','load-2'],['v1','load-2'],['v1','stress'],['v2','stress']];
-if(os.freemem()<900*1024*1024)throw new Error('Preflight: liberar RAM antes de preparar la batería');
+if(os.freemem()<900*1024*1024){
+ run('C:/Windows/System32/wsl.exe',['-d','docker-desktop','-u','root','--','sync']);
+ run('C:/Windows/System32/wsl.exe',['-d','docker-desktop','-u','root','--','sh','-c','echo 1 > /proc/sys/vm/drop_caches']);
+ log('PREFLIGHT INICIAL: esperar reclamación de memoria WSL antes de preparar datos');
+ for(let i=0;i<36 && os.freemem()<900*1024*1024;i++)await sleep(5000);
+ if(os.freemem()<900*1024*1024)throw new Error('Preflight: liberar RAM antes de preparar la batería');
+}
 for(const [version,type] of order){
  env.APP_VERSION=version;
  d(['compose','up','-d','--no-deps','--force-recreate','api']);
