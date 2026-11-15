@@ -3,7 +3,7 @@ import {mkdirSync,writeFileSync,appendFileSync,readFileSync,readdirSync} from 'n
 import {createHash} from 'node:crypto';
 import {resolve,join} from 'node:path';
 import os from 'node:os';
-const root=resolve(import.meta.dirname,'..'),out=join(root,'results','evaluacion-2026-11-14');
+const root=resolve(import.meta.dirname,'..'),out=join(root,'results','evaluacion-2026-11-14',process.env.CAMPAIGN || 'mediciones');
 mkdirSync(out,{recursive:true});
 const docker=process.env.DOCKER_EXE || 'C:/Program Files/Docker/Docker/resources/bin/docker.exe';
 const image='grafana/k6:1.0.0';
@@ -30,6 +30,11 @@ function integrity(){
  resources:Number(sql('SELECT count(*) FROM resources').trim()),reservations:Number(sql('SELECT count(*) FROM reservations').trim())};
 }
 async function k6(name,script,vars={}){
+ if(os.freemem()<900*1024*1024){
+  log('PREFLIGHT: esperando al menos 900 MiB libres antes de '+name);
+  for(let i=0;i<12 && os.freemem()<900*1024*1024;i++)await sleep(5000);
+  if(os.freemem()<900*1024*1024)throw new Error('Preflight inseguro: no se inicia carga con menos de 900 MiB libres');
+ }
  log('INICIO '+name);const start=Date.now(),container='reservaflow-k6-eval';
  const args=['run','--rm','--name',container,'--cpus','1','--memory','256m','--network','reservaflowbackend_default',
  '-v',root.replaceAll('\\','/')+'/k6:/scripts:ro','-v',out.replaceAll('\\','/')+':/results',
@@ -59,7 +64,9 @@ async function k6(name,script,vars={}){
  file(name+'.meta.json',result);log('FIN '+name+' exit='+code+' duracion='+result.seconds.toFixed(1)+'s');return result;
 }
 async function explain(version){
- const query="SELECT r.id,r.resource_id,rs.name,r.customer_name,r.reservation_date FROM reservations r JOIN resources rs ON rs.id=r.resource_id WHERE r.status='confirmed' ORDER BY r.reservation_date DESC,r.id DESC LIMIT 50 OFFSET 450";
+ const query=version==='v1'
+ ? "SELECT id,resource_id,customer_name,reservation_date,slot,guests,status,created_at FROM reservations WHERE status='confirmed' ORDER BY reservation_date DESC,id DESC LIMIT 50 OFFSET 450"
+ : "SELECT r.id,r.resource_id,rs.name AS resource_name,r.customer_name,r.reservation_date,r.slot,r.guests,r.status,r.created_at FROM reservations r JOIN resources rs ON rs.id=r.resource_id WHERE r.status='confirmed' ORDER BY r.reservation_date DESC,r.id DESC LIMIT 50 OFFSET 450";
  file(version+'-explain.txt',sql('EXPLAIN (ANALYZE, BUFFERS, FORMAT TEXT) '+query));
 }
 const codeFiles=['app/src/server.ts','app/src/listing.ts','app/src/db.ts','app/Dockerfile','app/package.json','docker-compose.yml','docker-compose.override.yml','db/init.sql','db/v2_fix.sql',...readdirSync(join(root,'k6/evaluation')).map(x=>'k6/evaluation/'+x),'scripts/benchmark.mjs','scripts/functional.mjs'];
@@ -70,6 +77,7 @@ file('environment.json',{recorded:new Date().toISOString(),host:JSON.parse(run('
  images:JSON.parse(d(['image','inspect',image,'reservaflowbackend-api','postgres:16-alpine'])),
  compose:d(['compose','config']),otherContainers:d(['ps','--format','{{.Names}} {{.Image}} {{.Status}}']),cache:'Calentamiento 15s después de cada restauración; no se vacía caché del SO/WSL; contenedores compartiendo host; dos repeticiones ABBA.'});
 const order=[['v1','load-1'],['v2','load-1'],['v2','load-2'],['v1','load-2'],['v1','stress'],['v2','stress']];
+if(os.freemem()<900*1024*1024)throw new Error('Preflight: liberar RAM antes de preparar la batería');
 for(const [version,type] of order){
  env.APP_VERSION=version;
  d(['compose','up','-d','--no-deps','--force-recreate','api']);
@@ -79,7 +87,8 @@ for(const [version,type] of order){
   file(version+'-functional.json',run(process.execPath,['scripts/functional.mjs']));
   if(integrity().overbooked!==0)throw new Error('Falla de integridad');
   await reset(version);
-  await k6(version+'-smoke','smoke.js');
+  const smoke=await k6(version+'-smoke','smoke.js');
+  if(smoke.exitCode!==0)throw new Error('Humo no completado; detener secuencia y conservar evidencia');
   await reset(version);
   await explain(version);
  }
@@ -94,6 +103,7 @@ for(const [version,type] of order){
   sql("DELETE FROM reservations WHERE customer_name LIKE 'k6-eval-%'; SELECT setval('reservations_id_seq',(SELECT max(id) FROM reservations));");
   await k6(version+'-recovery-safe','warmup.js',{DURATION:'30s',PHASE:'recuperacion_posterior'});
  }
+ if(result.stopReasons.length)throw new Error('Parada por memoria; detener secuencia para no seguir con estado inseguro');
  if(result.integrity.overbooked!==0)throw new Error('Sobrecupo detectado');
 }
 env.APP_VERSION='v2';d(['compose','up','-d','--no-deps','--force-recreate','api']);await ready();await reset('v2');
