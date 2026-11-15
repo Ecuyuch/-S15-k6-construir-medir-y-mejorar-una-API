@@ -3,7 +3,7 @@ import {mkdirSync,writeFileSync,appendFileSync,readFileSync,readdirSync} from 'n
 import {createHash} from 'node:crypto';
 import {resolve,join} from 'node:path';
 import os from 'node:os';
-import {assertFreshDirectory,assertWarmupComplete,monitorStopReason} from './trial-policy.mjs';
+import {assertFreshDirectory,assertWarmupComplete,monitorStopReason,persistWithRetry} from './trial-policy.mjs';
 const root=resolve(import.meta.dirname,'..'),out=join(root,'results','evaluacion-2026-11-14',process.env.CAMPAIGN || 'mediciones');
 assertFreshDirectory(out);
 mkdirSync(out,{recursive:true});
@@ -14,8 +14,9 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 function run(exe,args,extra={}){return execFileSync(exe,args,{cwd:root,env,encoding:'utf8',maxBuffer:30*1024*1024,...extra});}
 function d(args){return run(docker,args);}
 function sql(query){return d(['compose','exec','-T','db','psql','-U','reserva','-d','reservaflow','-v','ON_ERROR_STOP=1','-At','-c',query]);}
-function file(name,data){writeFileSync(join(out,name),typeof data==='string'?data:JSON.stringify(data,null,2));}
-function log(text){console.log(new Date().toISOString()+' '+text);appendFileSync(join(out,'execution.log'),new Date().toISOString()+' '+text+'\n');}
+function file(name,data){persistWithRetry(()=>writeFileSync(join(out,name),typeof data==='string'?data:JSON.stringify(data,null,2)));}
+function append(name,data){persistWithRetry(()=>appendFileSync(join(out,name),data));}
+function log(text){console.log(new Date().toISOString()+' '+text);append('execution.log',new Date().toISOString()+' '+text+'\n');}
 let activeRun=null,cancelled=false;
 function stopActive(){
  if(activeRun)try{d(['stop','--timeout','10','reservaflow-k6-eval']);}catch{}
@@ -63,7 +64,7 @@ async function k6(name,script,vars={}){
  '--out','json=/results/'+name+'.timeseries.json.gz','/scripts/evaluation/'+script);
  const child=spawn(docker,args,{cwd:root,env,windowsHide:true});
  let text='';file(name+'.console.txt','');
- function output(x){text+=x.toString();appendFileSync(join(out,name+'.console.txt'),x);}
+ function output(x){text+=x.toString();append(name+'.console.txt',x);}
  child.stdout.on('data',output);child.stderr.on('data',output);
  const resources=[],stopReasons=[];let violations=0,missing=0,finished=false,monitoring=false;
  child.on('exit',()=>finished=true);
@@ -75,7 +76,7 @@ async function k6(name,script,vars={}){
    sample.containers=lines;missing=0;
   }catch(e){sample.error=e.message;missing++;}
   try{
-   resources.push(sample);file(name+'.resources.json',resources);
+   resources.push(sample);append(name+'.resources.jsonl',JSON.stringify(sample)+'\n');
    const bad=free<400*1024*1024 || sample.containers.some(x=>Number(x.MemPerc.replace('%',''))>90);
    violations=bad?violations+1:0;
    const reason=free<250*1024*1024?'RAM crítica del host inferior a 250 MiB':monitorStopReason(violations,missing);

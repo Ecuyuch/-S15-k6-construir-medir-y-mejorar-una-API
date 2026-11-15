@@ -16,7 +16,7 @@ de este equipo. La batería vigente está en `k6/evaluation/`.
 - Al menos 500 MiB libres en Windows antes de inyectar carga. Cerrar aplicaciones no utilizadas.
 
 ```powershell
-git clone https://github.com/josuesanchez96/ReservaFlowBackend.git
+git clone https://github.com/Ecuyuch/-S15-k6-construir-medir-y-mejorar-una-API.git ReservaFlowBackend
 Set-Location -LiteralPath '.\ReservaFlowBackend'
 $env:Path = 'C:\Program Files\Docker\Docker\resources\bin;' + $env:Path
 docker compose up -d --build
@@ -24,9 +24,7 @@ docker compose exec -T db psql -U reserva -d reservaflow -v ON_ERROR_STOP=1 -f /
 Invoke-RestMethod http://localhost:3001/health
 ```
 
-**Los cambios de esta evaluación están inicialmente en la rama local
-`codex/evaluacion-rendimiento`; deben publicarse en un repositorio accesible antes
-de entregar.** Clonar únicamente el main remoto de origen no obtiene estos cambios.
+Repositorio de entrega: https://github.com/Ecuyuch/-S15-k6-construir-medir-y-mejorar-una-API (rama main). La rama de trabajo local es codex/evaluacion-rendimiento.
 
 ## Configuración y decisiones
 
@@ -129,4 +127,5 @@ docker compose up -d
 - [Thresholds de k6](https://grafana.com/docs/k6/latest/using-k6/thresholds/)
 - [Dropped iterations](https://grafana.com/docs/k6/latest/using-k6/scenarios/concepts/dropped-iterations/)
 - [Repositorio de origen](https://github.com/josuesanchez96/ReservaFlowBackend)
+
 

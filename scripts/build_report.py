@@ -133,9 +133,9 @@ p('La versión v1 obtuvo p95 de '+', '.join(f(x['latency']['p(95)'])+' ms' for x
   '; v2 obtuvo '+', '.join(f(x['latency']['p(95)'])+' ms' for x in v2)+'. Los resultados y las interrupciones se detallan en las páginas siguientes; una prueba detenida no cuenta como su duración completa.')
 sub('Enlaces de entrega')
 link('Repositorio de origen', 'https://github.com/josuesanchez96/ReservaFlowBackend')
-p('Repositorio con esta evaluación: AGREGAR EL ENLACE DEL FORK O DE LA RAMA PUBLICADA.')
+link('Repositorio con esta evaluación', 'https://github.com/Ecuyuch/-S15-k6-construir-medir-y-mejorar-una-API')
 p('Video de máximo 3 minutos: AGREGAR AQUÍ EL ENLACE ACCESIBLE.')
-p('Los cambios y resultados de esta evaluación están en la rama local codex/evaluacion-rendimiento. El origen es público, pero la conexión usada no tiene permiso de escritura; el enlace del origen no prueba que estos cambios estén publicados.')
+p('La entrega se publica en main del repositorio del estudiante, con la aplicación, scripts, datos, resultados originales y documentación. El enlace del video es el único campo de entrega que debe completarse antes de exportar y enviar el PDF definitivo.')
 sub('Alcance y autoría')
 p('La implementación de v1, v2 y el parche de índices ya existían en el repositorio de origen. Esta evaluación corrigió la semilla, fortaleció las comprobaciones y obtuvo evidencia local nueva. Los informes históricos se conservan separados y sus cifras no se atribuyen a este equipo.')
 
@@ -149,7 +149,7 @@ table(['Operación','Ruta','Comportamiento'],[
 p('Regla central: máximo 20 invitados confirmados por recurso, fecha y horario. El nombre debe tener contenido; guests debe ser entero positivo y slot debe estar entre 9 y 20. Las pruebas conservan esas reglas, incluidos los rechazos negativos esperados.')
 sub('Instalar e iniciar')
 p('Requisitos: Git, Docker Desktop con motor Linux y Compose compatible con !override, y Node.js 22 para el automatizador. El README contiene la ruta completa y los comandos sin abreviar.')
-code("git clone https://github.com/josuesanchez96/ReservaFlowBackend.git\ncd ReservaFlowBackend\n$env:Path = 'C:\\Program Files\\Docker\\Docker\\resources\\bin;' + $env:Path\ndocker compose up -d --build\ndocker compose exec -T db psql -U reserva -d reservaflow -f /db/v2_fix.sql\nInvoke-RestMethod http://localhost:3001/health")
+code("git clone https://github.com/Ecuyuch/-S15-k6-construir-medir-y-mejorar-una-API.git ReservaFlowBackend\ncd ReservaFlowBackend\n$env:Path = 'C:\\Program Files\\Docker\\Docker\\resources\\bin;' + $env:Path\ndocker compose up -d --build\ndocker compose exec -T db psql -U reserva -d reservaflow -f /db/v2_fix.sql\nInvoke-RestMethod http://localhost:3001/health")
 sub('Configurar y restablecer')
 p('API localhost:3001; PostgreSQL localhost:5433, base reservaflow y credenciales locales reserva/reserva. APP_VERSION selecciona v1 o v2 y requiere recrear solo la API. Los índices son un paso independiente. Los datos persisten en un volumen.')
 code("docker compose exec -T db psql -U reserva -d reservaflow -f /db/reset.sql\n# Solo v2: aplicar nuevamente /db/v2_fix.sql\n$env:APP_VERSION='v1'\ndocker compose up -d --no-deps --force-recreate api\n# Detener sin borrar datos: docker compose stop")
@@ -191,7 +191,8 @@ table(['Ámbito','Criterio de aprobación'],[
 ['Recuperación','p95 <300 ms; errores <1%; más de 20 peticiones en fase integrada']],[1.65,5.35])
 p('Los 200 ms son una meta interactiva propuesta que deja margen al cliente y la red. El p99 de 500 ms limita la cola larga, y errores<1% fija un presupuesto. Son criterios previos de aceptación, no garantías universales. No se modificaron después de observar los resultados.')
 sub('Límites y parada')
-p('Solo se usa la API propia en red Docker local. Timeout HTTP de 6 s. AbortOnFail si errores alcanzan 10% o p99 alcanza 5000 ms después de 30 s. El monitor toma muestras cada 5 s; tres muestras con RAM libre del host<400 MiB o memoria de contenedor>90% detienen el generador. Preflight exige al menos 500 MiB libres.')
+p('Solo se usa la API propia en red Docker local. Timeout HTTP de 6 s. AbortOnFail si errores alcanzan 10% o p99 alcanza 5000 ms después de 30 s. El monitor toma muestras cada 5 s; tres muestras con RAM libre del host<400 MiB o memoria de contenedor>90% detienen el generador. RAM del host<250 MiB activa parada inmediata. Preflight exige al menos 500 MiB libres.')
+p('La reserva inicial de 700 MiB impidió incluso el humo con servicios ajenos activos. Antes de la campaña definitiva se revisó a 400 MiB, tras detener siete servicios, observar ~27 MiB del generador y más de 2 GiB disponibles en WSL. Se aplicó la misma revisión a ambas versiones; no cambió ningún umbral de rendimiento.')
 p('Si hay interrupción se conservan resumen, consola y motivo; se verifica recuperación con una prueba posterior segura, sin reiniciar servidor. No se exige saturar v2 más allá de 40 VUs ni bloquear el equipo.')
 
 page('Hallazgo hipótesis y corrección')
@@ -225,6 +226,8 @@ else:
 for label,items in [('v1',v1),('v2',v2)]:
     vals=[x['latency']['p(95)'] for x in items]
     p('Variación de '+label+': p95 entre '+f(min(vals))+' y '+f(max(vals))+' ms; amplitud relativa al menor '+f((max(vals)-min(vals))/min(vals)*100)+'%. Dos repeticiones permiten describir variación, pero no inferir significancia estadística.')
+p('Reducción descriptiva de p95 por repetición: '+', '.join(f((1-b['latency']['p(95)']/a['latency']['p(95)'])*100)+'%' for a,b in zip(v1,v2))+
+  '. La corrección se evalúa como conjunto JOIN e índices; este diseño no atribuye un porcentaje individual a cada índice.')
 
 page('Operaciones recursos y lectura crítica')
 table(['Operación','v1 primera p95','v1 segunda p95','v2 primera p95','v2 segunda p95'],[
@@ -237,6 +240,7 @@ table(['Ensayo','CPU DB máx','RAM DB máx','CPU k6 máx','RAM libre mín'],[
 p('Docker expresa 100% CPU aproximadamente como un núcleo lógico. El límite es 1 CPU por contenedor; las muestras instantáneas pueden exceder ligeramente 100% por el intervalo. RAM proviene de docker stats y no es RSS puro. El muestreo cada 5 s puede omitir picos breves; datos completos de API, DB y generador están en resources.json.')
 p('dropped_iterations son iteraciones que k6 no inició; no son respuestas HTTP 500 ni pérdida de paquetes. Con arrival-rate aparecen cuando no hay VUs libres. Se deben leer junto a duración de iteración, 60 VUs máximas, CPU/RAM del generador, timeouts y recursos DB. El host compartido y la instrumentación también añaden variación.')
 p('Las latencias agregadas solo incluyen peticiones emitidas y finalizadas, incluidas las que fallan; las operaciones descartadas no tienen latencia. La mezcla completada puede diferir del 40/30/30 programado si hay descartes o aborto. Los estados HTTP y conteos por operación se derivan de la serie JSON original.')
+p('El timeout de 6 s censura las esperas mayores: un percentil cercano a 6000 ms no demuestra que el servidor completaría la operación en ese tiempo. req/s cuenta peticiones finalizadas por el generador, incluidas las fallidas; el rendimiento exitoso debe descontarlas.')
 for x in loads:
     counts={k:v['count'] for k,v in x['endpoints'].items()}
     p(x['name']+': mezcla completada '+', '.join(k+'='+str(v) for k,v in counts.items())+
@@ -292,7 +296,7 @@ p('1:05 a 1:55. Abrir las consolas reales v1/v2 y comparar p95, errores y rendim
 p('1:55 a 2:30. Mostrar listV1/listV2 y db/v2_fix.sql. Explicar 51 consultas frente a una e índices; señalar que la corrección ya venía en la base del proyecto.')
 p('2:30 a 2:55. Mostrar recuperación y regresión concurrente. Declarar límites de hardware, máximo 40 VUs y dos repeticiones. Finalizar antes de 3:00.')
 sub('Pasos pendientes de publicación')
-p('Publicar la rama local y sus resultados en un fork o repositorio con acceso de lectura. Sustituir el enlace de la primera página, grabar el video, comprobar ambos enlaces sin autenticación y exportar este Word actualizado a PDF.')
+p('Agregar el enlace del video en la primera página, comprobar que cualquier revisor pueda abrirlo y exportar el Word actualizado a PDF. El repositorio público del estudiante contiene los archivos y evidencias de esta evaluación.')
 sub('Referencias oficiales')
 link('Umbrales de k6','https://grafana.com/docs/k6/latest/using-k6/thresholds/')
 link('Iteraciones descartadas','https://grafana.com/docs/k6/latest/using-k6/scenarios/concepts/dropped-iterations/')

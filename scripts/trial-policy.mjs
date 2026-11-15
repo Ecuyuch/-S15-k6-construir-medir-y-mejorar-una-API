@@ -10,3 +10,11 @@ export function monitorStopReason(unsafeSamples,missingSamples){
  if(missingSamples>=3)return 'Pérdida de telemetría durante tres muestras';
  return null;
 }
+export function persistWithRetry(operation,delayMs=50){
+ for(let attempt=0;;attempt++){
+  try{return operation();}catch(error){
+   if(attempt>=4 || !['UNKNOWN','EPERM','EBUSY','EACCES'].includes(error.code))throw error;
+   if(delayMs)Atomics.wait(new Int32Array(new SharedArrayBuffer(4)),0,0,delayMs);
+  }
+ }
+}

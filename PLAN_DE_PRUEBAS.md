@@ -1,97 +1,80 @@
-# Plan de Pruebas de Rendimiento – ReservaFlow (Resumen Ejecutivo)
+# Plan previo de medición local
 
-> **Objetivo:** Comparar la API v1 (con cuello de botella) vs v2 (optimizada) bajo tráfico sostenido de 150 req/s y validar su resiliencia bajo estrés y recuperación con k6.
+Fecha de definición: 14 de noviembre de 2026, America/Guatemala.
+Estudiante: Eddy Gerardo Cuyuch Lopez. Carné: 2890-22-8567.
 
----
+## Demanda
 
-## 1. Entorno y Hardware de Prueba
+Hipótesis de demanda académica, no tráfico productivo observado: 40 operaciones/s.
+Cada iteración representa una operación HTTP. Mezcla por índice global de iteración
+módulo 10: 4 disponibilidades, 3 listados de 50 elementos, 3 creaciones.
+Los descartes pueden modificar la mezcla efectivamente completada; se informa la
+mezcla observada a partir de la salida original de k6.
 
-Todo el stack se ejecuta localmente en la misma máquina, compitiendo por CPU y RAM:
+Fechas de lectura en 2026-08-16 a 2027-02-12, relativas a ancla fija 2026-11-14.
+Fechas de escritura desde ancla+400 días, con combinación recurso/fecha/horario única
+por iteración; de ese modo los conflictos funcionales deliberados se miden en humo
+y regresión, y no se mezclan con errores inesperados de carga.
 
-| Componente | Especificación |
-|---|---|
-| **Equipo** | Lenovo LOQ 15ARP9 |
-| **CPU** | AMD Ryzen 5 7235HS @ 3.20 GHz (4 núcleos / 8 hilos lógicos) |
-| **RAM** | 16.0 GB DDR5 (15.7 GB utilizable, 4800 MT/s) |
-| **SO y Motor** | Windows 11 (x64) + Docker Desktop con backend WSL2 |
-| **Stack SUT** | Node.js 20 LTS (Express, TypeScript) + PostgreSQL 16 Alpine (pool: 10 conexiones) |
-| **Datos Iniciales** | 50 recursos y ~290,000 reservas en PostgreSQL |
-| **Herramienta** | Grafana k6 v0.x local |
+## Escenarios y criterios
 
----
-
-## 2. Demanda y Mezcla de Tráfico (70% Lectura / 30% Escritura)
-
-- **Tasa objetivo:** **150 iteraciones/segundo** sostenidas durante 5 minutos (45,000 peticiones objetivo).
-- **Modelo:** **Abierto (`constant-arrival-rate`)**. Desacopla la tasa de llegada de la latencia del servidor: si el backend se ralentiza, k6 sigue exigiendo 150 req/s, simulando tráfico real.
-- **Tope de seguridad:** `maxVUs: 300` (pre-asignadas: 50). Protege la RAM (16 GB) y CPU (8 hilos) del host contra congelamientos, registrando la saturación como `dropped_iterations`.
-
-### Distribución de endpoints
-1. **40% `GET /availability` (Lectura):** Consulta de horarios libres por recurso/fecha. Ejecuta agregaciones `SUM(guests)`.
-2. **30% `GET /reservations` (Lectura):** Listado paginado de 50 registros ordenados por fecha. Simula paneles de control.
-3. **30% `POST /reservations` (Escritura):** Creación transaccional con bloqueo pesimista `FOR UPDATE` para garantizar capacidad $\le 20$ personas por franja.
-
----
-
-## 3. Escenarios de Prueba
-
-| Script | Perfil k6 | Duración | Objetivo |
+| Escenario | Perfil | Duración | Criterio |
 |---|---|---|---|
-| **`smoke.js`** | 1 VU constante | 1 min | Verificar sanidad operativa, respuestas 200/201, rechazo 400 y regla de no sobrecupo con 409. |
-| **`load.js`** | 150 it/s (50 a 300 VUs) | 5 min | Medir latencias p(95)/p(99), throughput y dropped iterations bajo carga normal. |
-| **`stress_recovery.js`** | 7 etapas (0 $\rightarrow$ 20 $\rightarrow$ 60 $\rightarrow$ 100 VUs $\rightarrow$ 10 VUs $\rightarrow$ 0) | 12 min | Estresar hasta 100 VUs (límite del hardware) y verificar si al bajar a 10 VUs el sistema se recupera. |
+| Humo | 1 VU, pausa 1 s | 30 s | checks 100%, errores 0%, p95<2000 ms |
+| Calentamiento | 1 VU, pausa 0.5 s | 15 s | No es medición principal |
+| Sostenida | 40 it/s, 60 VUs preasignadas y máximas | 120 s | p95<200 ms, p99<500 ms, errores<1%, checks=100%, descartes=0 |
+| Estrés | 2/10/20/40/40/2/2/0 VUs | 20/25/25/20/20/10/50/10 s | errores<10%, p99<5000 ms |
+| Recuperación integrada | 2 VUs, pausa 0.25 s | 50 s después de descenso | p95<300 ms, errores<1%, >20 solicitudes |
+| Recuperación posterior segura | 1 VU, pausa 0.5 s | 30 s, si el estrés falla/aborta | p95<300 ms, errores<1%, checks=100% |
 
----
+Umbrales adicionales de carga por operación: disponibilidad p95<150 ms, listado y
+creación p95<250 ms. Los umbrales son metas propuestas para una API interactiva:
+200 ms deja margen a red/interfaz, 500 ms controla cola larga y errores<1% define
+el presupuesto. No son una obligación universal ni una medición previa.
 
-## 4. Criterios de Parada y Seguridad (`abortOnFail`)
+## Seguridad
 
-En `stress_recovery.js`, si el servidor colapsa bajo 100 VUs, continuar inyectando carga podría congelar Windows o corromper Docker. Se configuran dos **disyuntores automáticos** (`delayAbortEval: 30s`):
-1. **`http_req_failed` > 10%:** Cancela la prueba si la tasa de errores HTTP/conexión supera el 10%.
-2. **`http_req_duration` p(99) > 5,000 ms:** Cancela la prueba si la latencia del 1% de peticiones excede 5 s (cola desbordada).
+Solo contenedores propios en red reservaflowbackend_default; BASE_URL restringida
+a API local. Sin Canvas, servicios públicos ni inyección de carga hacia GitHub.
+Timeout HTTP 6 s. AbortOnFail cuando errores>=10% o p99>=5000 ms, después de 30 s.
+Se conservan esos límites y umbrales en v1 y v2.
 
----
+API: 1 CPU y 256 MiB. DB: 1 CPU y 512 MiB. Generador: 1 CPU y 256 MiB.
+Muestras cada 5 s de CPU, RAM, I/O, PIDs y RAM libre del host. Tres muestras seguidas
+con RAM libre del host<400 MiB o RAM de un contenedor>90% activan parada del generador.
+Si se interrumpe: registrar código/motivo y ejecutar recuperación posterior sin
+reiniciar la API ni PostgreSQL. Los demás proyectos quedan ejecutándose.
 
-## 5. Umbrales de Aprobación (Thresholds)
+## Comparación y trazabilidad
 
-### Carga Normal (`load.js`)
-- `http_req_duration`: **p(95) < 200 ms**, **p(99) < 500 ms** *(global)*
-- `http_req_duration{endpoint:availability}`: **p(95) < 150 ms**
-- `http_req_duration{endpoint:list}`: **p(95) < 250 ms**
-- `http_req_duration{endpoint:create}`: **p(95) < 250 ms**
-- `http_req_failed`: **< 1.00%**
-- `checks`: **> 99.00%**
+Carga dos veces por versión en orden v1/v2/v2/v1 (ABBA); luego estrés v1/v2.
+Mismo hardware, imágenes, límites, pool=10, scripts, thresholds y datos.
+Restaurar las tablas propias antes de cada prueba mediante db/reset.sql.
+Aplicar db/v2_fix.sql solo a v2. La semilla crea 289882 reservas:
+202731 confirmed, 58091 cancelled y 29060 pending.
+La corrección de datos es común a ambos grupos, no la variable de optimización.
 
-### Estrés y Recuperación (`stress_recovery.js`)
-- `http_req_failed`: **< 10%** *(crítico, aborta)*
-- `http_req_duration`: **p(99) < 5,000 ms** *(crítico, aborta)*
-- `http_req_duration{phase:recuperacion}`: **p(95) < 300 ms** *(criterio de resiliencia en baja carga post-estrés)*
-- `http_req_failed{phase:recuperacion}`: **< 1%**
+Cada medición se calienta 15 s; luego se borran solo las escrituras del
+calentamiento, se restablece secuencia y se ejecuta ANALYZE. No se vacía caché del SO.
+La huella SHA256 de todas las filas al restaurar debe coincidir en los seis ensayos.
+El reinicio de API por versión vacía su pool; el proceso DB continúa ejecutándose.
+No se afirma una comparación con caché fría.
 
----
+Guardar meta, integridad antes/después, resumen JSON, serie JSON gzip original,
+consola y recursos. Registrar versión del código y SHA256 de archivos medidos.
+Con dos repeticiones solo se describe variación; no se infiere significancia
+estadística. Si varía sustancialmente se investiga/repite sin bajar carga o umbrales.
+Si 40 VUs no saturan v2, declarar que no se alcanzó su saturación dentro del límite.
 
-## 6. Procedimiento Rápido de Ejecución
+Fuentes oficiales:
+- https://grafana.com/docs/k6/latest/using-k6/thresholds/
+- https://grafana.com/docs/k6/latest/using-k6/scenarios/concepts/dropped-iterations/
 
-```powershell
-# 1. Iniciar v1 (con cuello de botella)
-docker compose down -v
-$env:APP_VERSION = "v1"; docker compose up -d --build
+Preparación de campaña principal: se detuvieron temporalmente cuatro contenedores de presencia con autorización del estudiante. Antes de la campaña se sincronizó y liberó caché de páginas WSL (echo 1 > /proc/sys/vm/drop_caches). No se vacía caché entre versiones; se aplica el mismo calentamiento en cada ensayo. Fuente: https://devblogs.microsoft.com/commandline/memory-reclaim-in-the-windows-subsystem-for-linux-2/
 
-# 2. Ejecutar prueba de carga v1 (falla esperada: p(95) > 200ms y dropped_iterations > 0)
-k6 run --summary-export=results/load_v1.json k6/load.js
+Ajuste antes de la primera medición válida: la restauración vuelve a llenar caché WSL. Por ello se sincroniza y libera su caché de archivos después de CADA restauración en AMBAS versiones, antes del calentamiento de 15 s. Se conservan shared_buffers PostgreSQL y no se declara caché totalmente fría. Preflight espera hasta 180 s por 500 MiB libres; la regla de parada de 400 MiB permanece. Este párrafo sustituye la indicación anterior de no vaciar caché entre ensayos. Los intentos previos se conservan como interrumpidos y no son el comparador principal.
 
-# 3. Aplicar corrección v2 (índices SQL + cambio de versión)
-docker compose exec -T db psql -U reserva -d reservaflow -f /db/v2_fix.sql
-$env:APP_VERSION = "v2"; docker compose up -d --force-recreate api
+Campaña definitiva: además de los cuatro contenedores, se detuvieron temporalmente OracleServiceXE, MSSQLSERVER y MSSQL$SQLEXPRESS con autorización. Sus estados se guardan para restaurarlos. La preparación anterior se conserva en preparacion-con-servicios-nativos y no se combina con la campaña definitiva mediciones. Las reglas de parada y demanda permanecen idénticas.
 
-# 4. Validar v2 (pasa todos los umbrales en verde y 0 dropped_iterations)
-k6 run --summary-export=results/load_v2.json k6/load.js
-k6 run --summary-export=results/stress_recovery_v2.json k6/stress_recovery.js
-```
 
----
-
-## 7. Criterios de Éxito
-- **v1:** Evidencia clara del cuello de botella en `GET /reservations` ($p(95) \gg 200\text{ ms}$).
-- **v2:** Cumple 100% de los umbrales de carga a 150 it/s sin descartar iteraciones.
-- **Recuperación:** Retorna a latencias basales ($p(95) < 300\text{ ms}$) tras la etapa de estrés sin reinicio del contenedor.
-- **Integridad:** Cero violaciones de sobreventa (409) ni errores 500 en ninguna versión.
+Revisión final de seguridad ANTES de la primera carga de la campaña definitiva: la reserva de 700 MiB bloqueaba incluso el reposo. Se observaron ~27 MiB de k6 en el intento inicial, DB por debajo de su límite de 512 MiB y más de 2 GiB MemAvailable dentro de WSL. Con siete servicios ajenos detenidos, se fija preflight>=500 MiB Windows, parada <400 MiB durante tres muestras y parada inmediata <250 MiB. Se registra como revisión de seguridad del entorno, no como mejora de la API. Se aplicará sin cambios a ambos grupos. Carga 40it/s, duración120s, p95<200, p99<500, errores<1%, checks100%, descartes0 y abortos HTTP permanecen idénticos. Los intentos previos se conservan y se excluyen de la comparación principal.
