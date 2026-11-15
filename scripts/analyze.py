@@ -64,7 +64,10 @@ def main():
         if (OUT/(name+'.summary.json')).exists() and (OUT/(name+'.timeseries.json.gz')).exists():
             runs[name]=analyze(name)
     initial={p.name:json.loads(p.read_text()) for p in OUT.glob('*.initial.json')}
-    report={'runs':runs,'initial':initial,'identical_seed':len({x['sha256'] for x in initial.values()})==1}
+    expected={f'{v}-{t}.initial.json' for v in ['v1','v2'] for t in ['load-1','load-2','stress']}
+    complete=set(initial)==expected
+    report={'runs':runs,'initial':initial,'seed_check_complete':complete,
+            'identical_seed':complete and len({x['sha256'] for x in initial.values()})==1}
     (OUT/'analysis.json').write_text(json.dumps(report,indent=2,ensure_ascii=False),encoding='utf-8')
     rows=['# Resultados nuevos obtenidos localmente','',
           '| Ensayo | s reales | HTTP | req/s | p95 ms | p99 ms | Error % | Checks % | Descartes | Salida |',

@@ -24,6 +24,12 @@ Thumbs.db
 *.swp
 *.swo
 
+# Intermedios de documentación y respaldo local previo a las pruebas
+__pycache__/
+tmp/
+results/**/*.dump
+output/qa/
+
 # Logs temporales
 logs/
 *.log
