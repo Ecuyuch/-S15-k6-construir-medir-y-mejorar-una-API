@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import { execFileSync } from 'node:child_process';
+const docker = process.env.DOCKER_EXE || 'C:/Program Files/Docker/Docker/resources/bin/docker.exe';
+const sql = "SELECT status, count(*)::int AS n FROM reservations GROUP BY status ORDER BY status";
+const raw = execFileSync(docker, ['compose','exec','-T','db','psql','-U','reserva','-d','reservaflow','-At','-c',sql], {encoding:'utf8'});
+const rows = Object.fromEntries(raw.trim().split('\n').map(x => {const [s,n]=x.trim().split('|');return [s,Number(n)];}));
+console.log(JSON.stringify(rows));
+assert.deepEqual(Object.keys(rows).sort(), ['cancelled','confirmed','pending']);
+const total=Object.values(rows).reduce((a,b)=>a+b,0);
+assert.ok(total>280000 && total<300000, 'La siembra debe contener aproximadamente 290000 reservas');
+assert.ok(rows.confirmed/total>0.65 && rows.confirmed/total<0.75);
+console.log('PASS: distribución mixta y volumen representativo');

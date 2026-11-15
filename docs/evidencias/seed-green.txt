@@ -1,0 +1,2 @@
+{"cancelled":58091,"confirmed":202737,"pending":29060}
+PASS: distribución mixta y volumen representativo

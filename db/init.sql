@@ -36,22 +36,31 @@ FROM generate_series(1, 50) g;
 -- Rango de fechas sembradas: hoy-90 .. hoy+90 días.
 -- Máximo 3 filas por (recurso, fecha, franja) con <=4 invitados => <=12 <= 20,
 -- por lo que nunca se parte de un estado sobre-reservado.
-SELECT setseed(0.42);
-
+-- Una subconsulta LATERAL sin referencia externa puede evaluarse una sola vez.
+-- Derivar cada valor de md5 de una clave estable evita ese defecto y permite
+-- restaurar exactamente los mismos registros, fechas, estados e identificadores.
+WITH candidates AS (
+  SELECT r.id AS resource_id, d, s, k,
+         r.id || ':' || d || ':' || s || ':' || k AS key
+  FROM resources r
+  CROSS JOIN generate_series(-90, 90) d
+  CROSS JOIN generate_series(9, 20) s
+  CROSS JOIN generate_series(1, 3) k
+), seeded AS (
+  SELECT *,
+    ('x' || substr(md5(key || ':keep'), 1, 8))::bit(32)::bigint AS keep,
+    ('x' || substr(md5(key || ':status'), 1, 8))::bit(32)::bigint AS state,
+    ('x' || substr(md5(key || ':guests'), 1, 8))::bit(32)::bigint AS guests_seed
+  FROM candidates
+)
 INSERT INTO reservations (resource_id, customer_name, reservation_date, slot, guests, status, created_at)
-SELECT r.id,
-       'Cliente ' || (floor(random() * 5000))::int,
-       current_date + d,
-       s,
-       1 + floor(random() * 4)::int,
-       CASE WHEN x < 0.70 THEN 'confirmed' WHEN x < 0.90 THEN 'cancelled' ELSE 'pending' END,
-       now() - (random() * interval '120 days')
-FROM resources r
-CROSS JOIN generate_series(-90, 90) d
-CROSS JOIN generate_series(9, 20) s
-CROSS JOIN generate_series(1, 3) k
-CROSS JOIN LATERAL (SELECT random() AS x, random() AS keep) rnd
-WHERE rnd.keep < 0.89;
+SELECT resource_id, 'Cliente ' || (guests_seed % 5000),
+       DATE '2026-11-14' + d, s, 1 + guests_seed % 4,
+       CASE WHEN state % 100 < 70 THEN 'confirmed'
+            WHEN state % 100 < 90 THEN 'cancelled' ELSE 'pending' END,
+       TIMESTAMPTZ '2026-11-14 12:00:00+00' - (guests_seed % 10368000) * INTERVAL '1 second'
+FROM seeded WHERE keep % 100 < 89
+ORDER BY resource_id, d, s, k;
 
 ANALYZE;
 

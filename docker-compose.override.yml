@@ -1,0 +1,16 @@
+# Puertos locales para convivir con los servicios existentes del equipo.
+services:
+  db:
+    cpus: 1.0
+    mem_limit: 512m
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U reserva -d reservaflow"]
+    ports: !override
+      - "127.0.0.1:5433:5432"
+  api:
+    cpus: 1.0
+    mem_limit: 256m
+    environment:
+      APP_VERSION: ${APP_VERSION:-v2}
+    ports: !override
+      - "127.0.0.1:3001:3000"
