@@ -69,3 +69,5 @@ Si 40 VUs no saturan v2, declarar que no se alcanzó su saturación dentro del l
 Fuentes oficiales:
 - https://grafana.com/docs/k6/latest/using-k6/thresholds/
 - https://grafana.com/docs/k6/latest/using-k6/scenarios/concepts/dropped-iterations/
+
+Preparación de campaña principal: se detuvieron temporalmente cuatro contenedores de presencia con autorización del estudiante. Antes de la campaña se sincronizó y liberó caché de páginas WSL (echo 1 > /proc/sys/vm/drop_caches). No se vacía caché entre versiones; se aplica el mismo calentamiento en cada ensayo. Fuente: https://devblogs.microsoft.com/commandline/memory-reclaim-in-the-windows-subsystem-for-linux-2/
