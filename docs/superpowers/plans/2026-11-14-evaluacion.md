@@ -16,7 +16,7 @@ Especificación: lineamientos proporcionados por el estudiante en esta conversac
 - Estrés cerrado: 2/10/20/40/2/2/0 VUs; fases 20/25/25/40/10/50/10 segundos.
 - Abortos: errores >=10% o p99 >=5000 ms tras 30 s; timeout HTTP 6 s.
 - Contenedores: API 1 CPU/256 MiB; DB 1 CPU/512 MiB; generador 1 CPU/256 MiB.
-- Monitoreo cada 5 s; parar generador si RAM del host <700 MiB o RAM de contenedor
+- Monitoreo cada 5 s; parar generador si RAM del host <400 MiB o RAM de contenedor
   >90% del límite durante tres muestras. Nunca detener otros proyectos.
 - Semilla fija 2026-11-14, reinicio de tablas propias antes de cada medición,
   calentamiento 15 s, mismas imágenes/pool/concurrencia, sin vaciar caché del SO.
@@ -36,3 +36,4 @@ Especificación: lineamientos proporcionados por el estudiante en esta conversac
 Verificar páginas no vacías, fechas fijas, conflictos esperados, sobreventa concurrente,
 parada temprana, igualdad de estado inicial y ausencia de secretos en resultados.
 Pendiente externo: enlace del video y publicar los cambios y evidencias para revisión.
+

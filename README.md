@@ -13,7 +13,7 @@ de este equipo. La batería vigente está en `k6/evaluation/`.
 - Windows con Docker Desktop funcionando (motor Linux y Docker Compose >=2.24.4).
 - Git. Node.js 22 para el automatizador; Node.js 20 de la API se instala en su imagen.
 - Internet para descargar imágenes y dependencias; las pruebas solo apuntan a la API local.
-- Al menos 900 MiB libres en Windows antes de inyectar carga. Cerrar aplicaciones no utilizadas.
+- Al menos 500 MiB libres en Windows antes de inyectar carga. Cerrar aplicaciones no utilizadas.
 
 ```powershell
 git clone https://github.com/josuesanchez96/ReservaFlowBackend.git
@@ -129,3 +129,4 @@ docker compose up -d
 - [Thresholds de k6](https://grafana.com/docs/k6/latest/using-k6/thresholds/)
 - [Dropped iterations](https://grafana.com/docs/k6/latest/using-k6/scenarios/concepts/dropped-iterations/)
 - [Repositorio de origen](https://github.com/josuesanchez96/ReservaFlowBackend)
+

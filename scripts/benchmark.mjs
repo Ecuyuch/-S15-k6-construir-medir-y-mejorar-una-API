@@ -48,10 +48,10 @@ function integrity(){
 }
 async function k6(name,script,vars={}){
  if(cancelled)throw new Error('Secuencia cancelada');
- if(os.freemem()<900*1024*1024){
-  log('PREFLIGHT: esperando al menos 900 MiB libres antes de '+name);
-  for(let i=0;i<36 && os.freemem()<900*1024*1024;i++)await sleep(5000);
-  if(os.freemem()<900*1024*1024)throw new Error('Preflight inseguro: no se inicia carga con menos de 900 MiB libres');
+ if(os.freemem()<500*1024*1024){
+  log('PREFLIGHT: esperando al menos 500 MiB libres antes de '+name);
+  for(let i=0;i<36 && os.freemem()<500*1024*1024;i++)await sleep(5000);
+  if(os.freemem()<500*1024*1024)throw new Error('Preflight inseguro: no se inicia carga con menos de 500 MiB libres');
  }
  log('INICIO '+name);const start=Date.now(),container='reservaflow-k6-eval';
  activeRun=name;file(name+'.meta.json',{name,started:new Date(start).toISOString(),state:'running'});
@@ -76,9 +76,9 @@ async function k6(name,script,vars={}){
   }catch(e){sample.error=e.message;missing++;}
   try{
    resources.push(sample);file(name+'.resources.json',resources);
-   const bad=free<700*1024*1024 || sample.containers.some(x=>Number(x.MemPerc.replace('%',''))>90);
+   const bad=free<400*1024*1024 || sample.containers.some(x=>Number(x.MemPerc.replace('%',''))>90);
    violations=bad?violations+1:0;
-   const reason=monitorStopReason(violations,missing);
+   const reason=free<250*1024*1024?'RAM crítica del host inferior a 250 MiB':monitorStopReason(violations,missing);
    if(reason && !stopReasons.length){stopReasons.push(reason);log('PARADA SEGURIDAD '+name);stopActive();}
   }catch(e){sample.monitorError=e.message;stopReasons.push('Fallo al persistir monitor');stopActive();}
   finally{monitoring=false;}
@@ -106,12 +106,12 @@ file('environment.json',{recorded:new Date().toISOString(),host:JSON.parse(run('
  images:JSON.parse(d(['image','inspect',image,'reservaflowbackend-api','postgres:16-alpine'])),
  compose:d(['compose','config']),otherContainers:d(['ps','--format','{{.Names}} {{.Image}} {{.Status}}']),cache:'Después de cada restauración se sincroniza y descarta caché de archivos WSL; se conservan shared_buffers PG y se calienta 15s. Otros cuatro contenedores detenidos con autorización; dos repeticiones ABBA.'});
 const order=[['v1','load-1'],['v2','load-1'],['v2','load-2'],['v1','load-2'],['v1','stress'],['v2','stress']];
-if(os.freemem()<900*1024*1024){
+if(os.freemem()<500*1024*1024){
  run('C:/Windows/System32/wsl.exe',['-d','docker-desktop','-u','root','--','sync']);
  run('C:/Windows/System32/wsl.exe',['-d','docker-desktop','-u','root','--','sh','-c','echo 1 > /proc/sys/vm/drop_caches']);
  log('PREFLIGHT INICIAL: esperar reclamación de memoria WSL antes de preparar datos');
- for(let i=0;i<36 && os.freemem()<900*1024*1024;i++)await sleep(5000);
- if(os.freemem()<900*1024*1024)throw new Error('Preflight: liberar RAM antes de preparar la batería');
+ for(let i=0;i<36 && os.freemem()<500*1024*1024;i++)await sleep(5000);
+ if(os.freemem()<500*1024*1024)throw new Error('Preflight: liberar RAM antes de preparar la batería');
 }
 for(const [version,type] of order){
  env.APP_VERSION=version;
@@ -147,3 +147,4 @@ env.APP_VERSION='v2';d(['compose','up','-d','--no-deps','--force-recreate','api'
 file('v2-functional-final.json',run(process.execPath,['scripts/functional.mjs']));await reset('v2');
 file('final-state.json',{version:'v2',integrity:integrity(),containers:d(['compose','ps'])});
 log('EVALUACION COMPLETA');
+

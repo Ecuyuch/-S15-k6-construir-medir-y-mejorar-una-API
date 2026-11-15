@@ -41,7 +41,7 @@ Se conservan esos límites y umbrales en v1 y v2.
 
 API: 1 CPU y 256 MiB. DB: 1 CPU y 512 MiB. Generador: 1 CPU y 256 MiB.
 Muestras cada 5 s de CPU, RAM, I/O, PIDs y RAM libre del host. Tres muestras seguidas
-con RAM libre del host<700 MiB o RAM de un contenedor>90% activan parada del generador.
+con RAM libre del host<400 MiB o RAM de un contenedor>90% activan parada del generador.
 Si se interrumpe: registrar código/motivo y ejecutar recuperación posterior sin
 reiniciar la API ni PostgreSQL. Los demás proyectos quedan ejecutándose.
 
@@ -72,6 +72,9 @@ Fuentes oficiales:
 
 Preparación de campaña principal: se detuvieron temporalmente cuatro contenedores de presencia con autorización del estudiante. Antes de la campaña se sincronizó y liberó caché de páginas WSL (echo 1 > /proc/sys/vm/drop_caches). No se vacía caché entre versiones; se aplica el mismo calentamiento en cada ensayo. Fuente: https://devblogs.microsoft.com/commandline/memory-reclaim-in-the-windows-subsystem-for-linux-2/
 
-Ajuste antes de la primera medición válida: la restauración vuelve a llenar caché WSL. Por ello se sincroniza y libera su caché de archivos después de CADA restauración en AMBAS versiones, antes del calentamiento de 15 s. Se conservan shared_buffers PostgreSQL y no se declara caché totalmente fría. Preflight espera hasta 180 s por 900 MiB libres; la regla de parada de 700 MiB permanece. Este párrafo sustituye la indicación anterior de no vaciar caché entre ensayos. Los intentos previos se conservan como interrumpidos y no son el comparador principal.
+Ajuste antes de la primera medición válida: la restauración vuelve a llenar caché WSL. Por ello se sincroniza y libera su caché de archivos después de CADA restauración en AMBAS versiones, antes del calentamiento de 15 s. Se conservan shared_buffers PostgreSQL y no se declara caché totalmente fría. Preflight espera hasta 180 s por 500 MiB libres; la regla de parada de 400 MiB permanece. Este párrafo sustituye la indicación anterior de no vaciar caché entre ensayos. Los intentos previos se conservan como interrumpidos y no son el comparador principal.
 
 Campaña definitiva: además de los cuatro contenedores, se detuvieron temporalmente OracleServiceXE, MSSQLSERVER y MSSQL$SQLEXPRESS con autorización. Sus estados se guardan para restaurarlos. La preparación anterior se conserva en preparacion-con-servicios-nativos y no se combina con la campaña definitiva mediciones. Las reglas de parada y demanda permanecen idénticas.
+
+
+Revisión final de seguridad ANTES de la primera carga de la campaña definitiva: la reserva de 700 MiB bloqueaba incluso el reposo. Se observaron ~27 MiB de k6 en el intento inicial, DB por debajo de su límite de 512 MiB y más de 2 GiB MemAvailable dentro de WSL. Con siete servicios ajenos detenidos, se fija preflight>=500 MiB Windows, parada <400 MiB durante tres muestras y parada inmediata <250 MiB. Se registra como revisión de seguridad del entorno, no como mejora de la API. Se aplicará sin cambios a ambos grupos. Carga 40it/s, duración120s, p95<200, p99<500, errores<1%, checks100%, descartes0 y abortos HTTP permanecen idénticos. Los intentos previos se conservan y se excluyen de la comparación principal.

@@ -191,7 +191,7 @@ table(['Ámbito','Criterio de aprobación'],[
 ['Recuperación','p95 <300 ms; errores <1%; más de 20 peticiones en fase integrada']],[1.65,5.35])
 p('Los 200 ms son una meta interactiva propuesta que deja margen al cliente y la red. El p99 de 500 ms limita la cola larga, y errores<1% fija un presupuesto. Son criterios previos de aceptación, no garantías universales. No se modificaron después de observar los resultados.')
 sub('Límites y parada')
-p('Solo se usa la API propia en red Docker local. Timeout HTTP de 6 s. AbortOnFail si errores alcanzan 10% o p99 alcanza 5000 ms después de 30 s. El monitor toma muestras cada 5 s; tres muestras con RAM libre del host<700 MiB o memoria de contenedor>90% detienen el generador. Preflight exige al menos 900 MiB libres.')
+p('Solo se usa la API propia en red Docker local. Timeout HTTP de 6 s. AbortOnFail si errores alcanzan 10% o p99 alcanza 5000 ms después de 30 s. El monitor toma muestras cada 5 s; tres muestras con RAM libre del host<400 MiB o memoria de contenedor>90% detienen el generador. Preflight exige al menos 500 MiB libres.')
 p('Si hay interrupción se conservan resumen, consola y motivo; se verifica recuperación con una prueba posterior segura, sin reiniciar servidor. No se exige saturar v2 más allá de 40 VUs ni bloquear el equipo.')
 
 page('Hallazgo hipótesis y corrección')
@@ -306,3 +306,4 @@ for section in D.sections:
 path=OUT/'Informe_ReservaFlow_Eddy_Cuyuch.docx'
 D.save(path)
 print(path)
+
