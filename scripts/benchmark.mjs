@@ -23,6 +23,11 @@ async function reset(version){
  if(version==='v2')d(['compose','exec','-T','db','psql','-U','reserva','-d','reservaflow','-v','ON_ERROR_STOP=1','-f','/db/v2_fix.sql']);
  const copy=sql("COPY (SELECT id,resource_id,customer_name,reservation_date,slot,guests,status,created_at FROM reservations ORDER BY id) TO STDOUT WITH CSV");
  const fingerprint=createHash('sha256').update(copy).digest('hex');
+ // Preparación idéntica para ambos grupos: devolver caché de archivos de WSL
+ // al host, conservando los shared_buffers de PostgreSQL. Luego se calienta 15s.
+ run('C:/Windows/System32/wsl.exe',['-d','docker-desktop','-u','root','--','sync']);
+ run('C:/Windows/System32/wsl.exe',['-d','docker-desktop','-u','root','--','sh','-c','echo 1 > /proc/sys/vm/drop_caches']);
+ if(global.gc)global.gc();
  return {sha256:fingerprint,distribution:sql("SELECT status,count(*) FROM reservations GROUP BY status ORDER BY status"),indexes:sql("SELECT indexname FROM pg_indexes WHERE tablename='reservations' ORDER BY indexname")};
 }
 function integrity(){
@@ -32,7 +37,7 @@ function integrity(){
 async function k6(name,script,vars={}){
  if(os.freemem()<900*1024*1024){
   log('PREFLIGHT: esperando al menos 900 MiB libres antes de '+name);
-  for(let i=0;i<12 && os.freemem()<900*1024*1024;i++)await sleep(5000);
+  for(let i=0;i<36 && os.freemem()<900*1024*1024;i++)await sleep(5000);
   if(os.freemem()<900*1024*1024)throw new Error('Preflight inseguro: no se inicia carga con menos de 900 MiB libres');
  }
  log('INICIO '+name);const start=Date.now(),container='reservaflow-k6-eval';
@@ -75,7 +80,7 @@ file('code-manifest.json',{gitCommit:run('git',['rev-parse','HEAD']).trim(),bran
 file('environment.json',{recorded:new Date().toISOString(),host:JSON.parse(run('C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe',['-NoProfile','-Command',"$c=Get-CimInstance Win32_ComputerSystem; $p=Get-CimInstance Win32_Processor; $o=Get-CimInstance Win32_OperatingSystem; [pscustomobject]@{Manufacturer=$c.Manufacturer;Model=$c.Model;PhysicalMemory=$c.TotalPhysicalMemory;CPU=$p.Name;Cores=$p.NumberOfCores;LogicalProcessors=$p.NumberOfLogicalProcessors;OS=$o.Caption;OSVersion=$o.Version} | ConvertTo-Json -Compress"])),
  docker:JSON.parse(d(['info','--format','{{json .}}'])),k6:d(['run','--rm',image,'version']).trim(),
  images:JSON.parse(d(['image','inspect',image,'reservaflowbackend-api','postgres:16-alpine'])),
- compose:d(['compose','config']),otherContainers:d(['ps','--format','{{.Names}} {{.Image}} {{.Status}}']),cache:'Calentamiento 15s después de cada restauración; no se vacía caché del SO/WSL; contenedores compartiendo host; dos repeticiones ABBA.'});
+ compose:d(['compose','config']),otherContainers:d(['ps','--format','{{.Names}} {{.Image}} {{.Status}}']),cache:'Después de cada restauración se sincroniza y descarta caché de archivos WSL; se conservan shared_buffers PG y se calienta 15s. Otros cuatro contenedores detenidos con autorización; dos repeticiones ABBA.'});
 const order=[['v1','load-1'],['v2','load-1'],['v2','load-2'],['v1','load-2'],['v1','stress'],['v2','stress']];
 if(os.freemem()<900*1024*1024)throw new Error('Preflight: liberar RAM antes de preparar la batería');
 for(const [version,type] of order){
