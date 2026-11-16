@@ -1,0 +1,19 @@
+Limit  (cost=51.37..57.01 rows=50 width=60) (actual time=1.574..1.607 rows=50 loops=1)
+  Buffers: shared hit=74 read=5
+  ->  Nested Loop  (cost=0.57..23013.24 rows=203874 width=60) (actual time=1.037..1.591 rows=500 loops=1)
+        Buffers: shared hit=74 read=5
+        ->  Index Scan using idx_reservations_status_date on reservations r  (cost=0.42..17967.14 rows=203874 width=49) (actual time=1.013..1.407 rows=500 loops=1)
+              Index Cond: (status = 'confirmed'::text)
+              Buffers: shared hit=28 read=5
+        ->  Memoize  (cost=0.15..0.17 rows=1 width=15) (actual time=0.000..0.000 rows=1 loops=500)
+              Cache Key: r.resource_id
+              Cache Mode: logical
+              Hits: 477  Misses: 23  Evictions: 0  Overflows: 0  Memory Usage: 3kB
+              Buffers: shared hit=46
+              ->  Index Scan using resources_pkey on resources rs  (cost=0.14..0.16 rows=1 width=15) (actual time=0.001..0.001 rows=1 loops=23)
+                    Index Cond: (id = r.resource_id)
+                    Buffers: shared hit=46
+Planning:
+  Buffers: shared hit=312
+Planning Time: 1.225 ms
+Execution Time: 1.687 ms

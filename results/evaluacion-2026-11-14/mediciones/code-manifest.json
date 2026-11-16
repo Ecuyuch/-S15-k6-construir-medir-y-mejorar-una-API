@@ -1,0 +1,23 @@
+{
+  "gitCommit": "cf44f46c066062ce09b9badb47c69cc43da2bfc5",
+  "branch": "codex/evaluacion-rendimiento",
+  "hashes": {
+    "app/src/server.ts": "0f40b780814cfdb865bc063bb4f3158f2de54839e185880380a4864124101051",
+    "app/src/listing.ts": "e1b293e5b8720d0ca1e2c168269414ce3e085b71528ade1a9d3508184c473eb0",
+    "app/src/db.ts": "df7111833c5902bd6017bec06796747d54974e6af6c2ea79b38070a43167920f",
+    "app/Dockerfile": "d5b306a8dcce9da1240b7dcdc4900a0735b28e29a66dfd1303ac24965633f592",
+    "app/package.json": "da15f494693c5b6e564f28317cd8a0d3092fcd1311f205bbda76c080c0cc6906",
+    "docker-compose.yml": "656e3e7d731252bed467f389c271f883519aec619f30d0e35ca49756799321a0",
+    "docker-compose.override.yml": "342bc27db3b3088f2a2535a8b8c15c9836f89ed467a831f7004ad272293072b8",
+    "db/init.sql": "68d0be65b7f8c1710a61f6997d7c9ca7ba4033448714025505265dc53ea4fbe5",
+    "db/v2_fix.sql": "c246ae3452808d95967b4c397d65fac500f7450165c3ef4adda9ee77e0ec121f",
+    "k6/evaluation/lib.js": "a10dfb979e94de9d590c9f234d0051e61da8994faec90060e01abd4978634763",
+    "k6/evaluation/load.js": "451ad610356164367d1e93fd8d822a2179f33517a69fc9aefb47e1a022d0dc76",
+    "k6/evaluation/smoke.js": "fdc852a136631afbf39ff3264a23013186af9b4c6a42da56cea3a5bb92d86084",
+    "k6/evaluation/stress_recovery.js": "737aae136b277a84598b792f4a142695557aaa9584be755c341e0d43adbc1fba",
+    "k6/evaluation/warmup.js": "42280cfa0b9cfdb9c73682ade86ee447a239be145c6895e20a1cb2d02346d941",
+    "scripts/benchmark.mjs": "33f989dd6f4cd47c90a279fa01420927fe770262ba9c41c523a9325b5a3d6503",
+    "scripts/trial-policy.mjs": "8deb422a4b63788533383d65836635e9bacab8d1f7ca30427ceecec76dbd8159",
+    "scripts/functional.mjs": "b76c43489696f24d7930255bd71d3e214b40c438e9dab3a8865a8d09983d47fb"
+  }
+}

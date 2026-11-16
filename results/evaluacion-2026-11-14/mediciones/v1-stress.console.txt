@@ -1,0 +1,74 @@
+time="2026-11-15T06:41:02Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=13&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:41:02Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=13&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:41:02Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=13&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:41:03Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=14&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:41:03Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=14&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:41:03Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=14&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:41:04Z" level=error msg="thresholds on metrics 'checks, http_req_duration' were crossed; at least one has abortOnFail enabled, stopping test prematurely"
+
+
+  █ THRESHOLDS 
+
+    checks
+    ✗ 'rate==1' rate=98.94%
+
+    http_req_duration
+    ✗ 'p(99)<5000' p(99)=5.53s
+
+      {phase:base}
+      ✓ 'p(95)<300' p(95)=123.32ms
+
+      {phase:meseta}
+      ✓ 'p(95)<5000' p(95)=0s
+
+      {phase:recuperacion}
+      ✓ 'p(95)<300' p(95)=0s
+
+    http_req_failed
+    ✓ 'rate<0.10' rate=1.05%
+
+      {phase:recuperacion}
+      ✓ 'rate<0.01' rate=0.00%
+
+    http_reqs{phase:recuperacion}
+    ✗ 'count>20' count=0
+
+
+  █ TOTAL RESULTS 
+
+    checks_total.......................: 1142   15.039957/s
+    checks_succeeded...................: 98.94% 1130 out of 1142
+    checks_failed......................: 1.05%  12 out of 1142
+
+    ✓ availability HTTP 200
+    ✓ 12 franjas y capacidad coherente
+    ✗ list HTTP 200
+      ↳  96% — ✓ 156 / ✗ 6
+    ✗ pagina de 50 reservas confirmadas
+      ↳  96% — ✓ 156 / ✗ 6
+    ✓ create HTTP 201
+    ✓ reserva conserva campos
+
+    HTTP
+    http_req_duration.......................................................: avg=831.43ms min=15.41ms  med=648.19ms max=6s       p(90)=1.64s   p(95)=3.4s     p(99)=5.53s   
+      { expected_response:true }............................................: avg=776.53ms min=15.41ms  med=644.46ms max=5.32s    p(90)=1.63s   p(95)=2.94s    p(99)=4.54s   
+      { phase:base }........................................................: avg=48.3ms   min=15.98ms  med=28.8ms   max=317.07ms p(90)=95.65ms p(95)=123.32ms p(99)=252.17ms
+      { phase:meseta }......................................................: avg=0s       min=0s       med=0s       max=0s       p(90)=0s      p(95)=0s       p(99)=0s      
+      { phase:recuperacion }................................................: avg=0s       min=0s       med=0s       max=0s       p(90)=0s      p(95)=0s       p(99)=0s      
+    http_req_failed.........................................................: 1.05%  6 out of 571
+      { phase:recuperacion }................................................: 0.00%  0 out of 0
+    http_reqs...............................................................: 571    7.519979/s
+      { phase:recuperacion }................................................: 0      0/s
+
+    EXECUTION
+    iteration_duration......................................................: avg=1.08s    min=266.08ms med=899.68ms max=6.25s    p(90)=1.89s   p(95)=3.65s    p(99)=5.79s   
+    iterations..............................................................: 571    7.519979/s
+    vus.....................................................................: 25     min=2        max=25
+    vus_max.................................................................: 40     min=40       max=40
+
+    NETWORK
+    data_received...........................................................: 2.1 MB 27 kB/s
+    data_sent...............................................................: 97 kB  1.3 kB/s
+
+
+

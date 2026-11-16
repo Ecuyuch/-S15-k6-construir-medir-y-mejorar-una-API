@@ -1,0 +1,14 @@
+{
+  "name": "v1-smoke",
+  "script": "smoke.js",
+  "started": "2026-11-15T06:06:37.972Z",
+  "ended": "2026-11-15T06:07:10.004Z",
+  "seconds": 32.032,
+  "exitCode": 0,
+  "stopReasons": [],
+  "integrity": {
+    "overbooked": 0,
+    "resources": 50,
+    "reservations": 289889
+  }
+}

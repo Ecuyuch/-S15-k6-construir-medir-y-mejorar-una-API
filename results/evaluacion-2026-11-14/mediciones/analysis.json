@@ -1,0 +1,1772 @@
+{
+  "runs": {
+    "v1-load-1-warmup": {
+      "name": "v1-load-1-warmup",
+      "meta": {
+        "name": "v1-load-1-warmup",
+        "script": "warmup.js",
+        "started": "2026-11-15T06:29:50.913Z",
+        "ended": "2026-11-15T06:30:08.460Z",
+        "seconds": 17.547,
+        "exitCode": 0,
+        "stopReasons": [],
+        "cancelled": false,
+        "integrity": {
+          "overbooked": 0,
+          "resources": 50,
+          "reservations": 289890
+        }
+      },
+      "latency": {
+        "p(99)": 55.9135044,
+        "avg": 31.947684172413787,
+        "min": 18.261075,
+        "med": 26.959778,
+        "max": 56.546191,
+        "p(90)": 48.873802999999995,
+        "p(95)": 53.8469396,
+        "thresholds": {
+          "p(95)<300": false
+        }
+      },
+      "error_rate": 0,
+      "check_rate": 1,
+      "requests": {
+        "count": 29,
+        "rate": 1.8754147926437499
+      },
+      "iterations": {
+        "count": 29,
+        "rate": 1.8754147926437499
+      },
+      "dropped": null,
+      "vus": {
+        "value": 1,
+        "min": 1,
+        "max": 1
+      },
+      "endpoints": {
+        "availability": {
+          "count": 12,
+          "p95": 37.72980954999999,
+          "p99": 42.302438710000004,
+          "avg": 25.547865916666666
+        },
+        "list": {
+          "count": 9,
+          "p95": 55.642353,
+          "p99": 56.3654234,
+          "avg": 46.99019366666667
+        },
+        "create": {
+          "count": 8,
+          "p95": 29.294104400000002,
+          "p99": 30.02416968,
+          "avg": 24.624588375000002
+        }
+      },
+      "phase_counts": {
+        "calentamiento": 29
+      },
+      "status_codes": {
+        "200": 21,
+        "201": 8
+      },
+      "failed_thresholds": [],
+      "recovery": {},
+      "resources": {
+        "reservaflow-api": {
+          "cpu_avg": 0.5449999999999999,
+          "cpu_max": 0.57,
+          "memory_pct_max": 7.27,
+          "memory_MiB_max": 18.61
+        },
+        "reservaflow-db": {
+          "cpu_avg": 7.91,
+          "cpu_max": 8.97,
+          "memory_pct_max": 23.44,
+          "memory_MiB_max": 120.0
+        },
+        "reservaflow-k6-eval": {
+          "cpu_avg": 1.3399999999999999,
+          "cpu_max": 1.39,
+          "memory_pct_max": 6.07,
+          "memory_MiB_max": 15.54
+        }
+      },
+      "host_free_MiB_min": 614.51953125,
+      "resource_samples": 3,
+      "early_window_diagnostic": {
+        "interval_from_docker_start": "2<=t<17 seconds",
+        "samples": 26,
+        "p95": 54.01181075,
+        "note": "Diagnostico exploratorio; ventana de finalizacion desde arranque Docker, no comparación causal equivalente"
+      }
+    },
+    "v1-load-1": {
+      "name": "v1-load-1",
+      "meta": {
+        "name": "v1-load-1",
+        "script": "load.js",
+        "started": "2026-11-15T06:30:11.775Z",
+        "ended": "2026-11-15T06:30:44.719Z",
+        "seconds": 32.944,
+        "exitCode": 99,
+        "stopReasons": [],
+        "cancelled": false,
+        "integrity": {
+          "overbooked": 0,
+          "resources": 50,
+          "reservations": 290047
+        }
+      },
+      "latency": {
+        "min": 18.568159,
+        "med": 2977.4124685,
+        "max": 6013.50515,
+        "p(90)": 6000.5129855,
+        "p(95)": 6000.80917785,
+        "p(99)": 6002.004137649999,
+        "avg": 3494.8983853653062,
+        "thresholds": {
+          "p(95)<200": true,
+          "p(99)<500": true,
+          "p(99)<5000": true
+        }
+      },
+      "error_rate": 0.2693877551020408,
+      "check_rate": 0.7306122448979592,
+      "requests": {
+        "count": 490,
+        "rate": 15.319915185083914
+      },
+      "iterations": {
+        "count": 490,
+        "rate": 15.319915185083914
+      },
+      "dropped": 730,
+      "vus": {
+        "value": 60,
+        "min": 30,
+        "max": 60
+      },
+      "endpoints": {
+        "availability": {
+          "count": 204,
+          "p95": 4166.5836233,
+          "p99": 4520.45232907,
+          "avg": 3046.9184135637256
+        },
+        "create": {
+          "count": 154,
+          "p95": 2877.74801035,
+          "p99": 3197.78081052,
+          "avg": 1942.1373529935065
+        },
+        "list": {
+          "count": 132,
+          "p95": 6001.55352635,
+          "p99": 6008.47226126,
+          "avg": 5998.785606825758
+        }
+      },
+      "phase_counts": {
+        "carga": 490
+      },
+      "status_codes": {
+        "200": 204,
+        "201": 154,
+        "0": 132
+      },
+      "failed_thresholds": [
+        "dropped_iterations: count==0",
+        "http_req_duration: p(95)<200",
+        "http_req_duration: p(99)<500",
+        "http_req_duration: p(99)<5000",
+        "http_req_duration{endpoint:list}: p(95)<250",
+        "checks: rate==1",
+        "http_req_duration{endpoint:availability}: p(95)<150",
+        "http_req_failed: rate<0.10",
+        "http_req_failed: rate<0.01",
+        "http_req_duration{endpoint:create}: p(95)<250"
+      ],
+      "recovery": {},
+      "resources": {
+        "reservaflow-api": {
+          "cpu_avg": 6.583333333333333,
+          "cpu_max": 7.95,
+          "memory_pct_max": 11.37,
+          "memory_MiB_max": 29.11
+        },
+        "reservaflow-db": {
+          "cpu_avg": 100.44166666666666,
+          "cpu_max": 102.54,
+          "memory_pct_max": 29.9,
+          "memory_MiB_max": 153.1
+        },
+        "reservaflow-k6-eval": {
+          "cpu_avg": 4.658333333333333,
+          "cpu_max": 5.6,
+          "memory_pct_max": 13.41,
+          "memory_MiB_max": 34.33
+        }
+      },
+      "host_free_MiB_min": 528.6953125,
+      "resource_samples": 6,
+      "early_window_diagnostic": {
+        "interval_from_docker_start": "2<=t<17 seconds",
+        "samples": 221,
+        "p95": 6000.774812,
+        "note": "Diagnostico exploratorio; ventana de finalizacion desde arranque Docker, no comparación causal equivalente"
+      }
+    },
+    "v1-load-2-warmup": {
+      "name": "v1-load-2-warmup",
+      "meta": {
+        "name": "v1-load-2-warmup",
+        "script": "warmup.js",
+        "started": "2026-11-15T06:37:27.663Z",
+        "ended": "2026-11-15T06:37:44.330Z",
+        "seconds": 16.667,
+        "exitCode": 0,
+        "stopReasons": [],
+        "cancelled": false,
+        "integrity": {
+          "overbooked": 0,
+          "resources": 50,
+          "reservations": 289889
+        }
+      },
+      "latency": {
+        "min": 23.382323,
+        "med": 34.553656000000004,
+        "max": 99.316158,
+        "p(90)": 68.7658851,
+        "p(95)": 87.78008424999996,
+        "p(99)": 98.87352135,
+        "avg": 45.64243242857143,
+        "thresholds": {
+          "p(95)<300": false
+        }
+      },
+      "error_rate": 0,
+      "check_rate": 1,
+      "requests": {
+        "count": 28,
+        "rate": 1.8266044965934791
+      },
+      "iterations": {
+        "count": 28,
+        "rate": 1.8266044965934791
+      },
+      "dropped": null,
+      "vus": {
+        "value": 1,
+        "min": 1,
+        "max": 1
+      },
+      "endpoints": {
+        "availability": {
+          "count": 12,
+          "p95": 71.42271979999995,
+          "p99": 92.42595436000002,
+          "avg": 37.211708
+        },
+        "list": {
+          "count": 9,
+          "p95": 87.34991,
+          "p99": 96.9229084,
+          "avg": 67.56226055555555
+        },
+        "create": {
+          "count": 7,
+          "p95": 41.7202265,
+          "p99": 44.55956690000001,
+          "avg": 31.912466714285713
+        }
+      },
+      "phase_counts": {
+        "calentamiento": 28
+      },
+      "status_codes": {
+        "200": 21,
+        "201": 7
+      },
+      "failed_thresholds": [],
+      "recovery": {},
+      "resources": {
+        "reservaflow-api": {
+          "cpu_avg": 0.62,
+          "cpu_max": 0.83,
+          "memory_pct_max": 6.06,
+          "memory_MiB_max": 15.52
+        },
+        "reservaflow-db": {
+          "cpu_avg": 8.476666666666667,
+          "cpu_max": 12.5,
+          "memory_pct_max": 23.4,
+          "memory_MiB_max": 119.8
+        },
+        "reservaflow-k6-eval": {
+          "cpu_avg": 1.3366666666666667,
+          "cpu_max": 2.05,
+          "memory_pct_max": 5.8,
+          "memory_MiB_max": 14.84
+        }
+      },
+      "host_free_MiB_min": 787.125,
+      "resource_samples": 3,
+      "early_window_diagnostic": {
+        "interval_from_docker_start": "2<=t<17 seconds",
+        "samples": 26,
+        "p95": 69.17387625,
+        "note": "Diagnostico exploratorio; ventana de finalizacion desde arranque Docker, no comparación causal equivalente"
+      }
+    },
+    "v1-load-2": {
+      "name": "v1-load-2",
+      "meta": {
+        "name": "v1-load-2",
+        "script": "load.js",
+        "started": "2026-11-15T06:37:48.638Z",
+        "ended": "2026-11-15T06:38:21.938Z",
+        "seconds": 33.3,
+        "exitCode": 99,
+        "stopReasons": [],
+        "cancelled": false,
+        "integrity": {
+          "overbooked": 0,
+          "resources": 50,
+          "reservations": 290038
+        }
+      },
+      "latency": {
+        "p(99)": 6001.98624081,
+        "avg": 3692.8589351089786,
+        "min": 55.530582,
+        "med": 3308.845544,
+        "max": 6004.310891,
+        "p(90)": 6000.5784193,
+        "p(95)": 6000.85980695,
+        "thresholds": {
+          "p(95)<200": true,
+          "p(99)<500": true,
+          "p(99)<5000": true
+        }
+      },
+      "error_rate": 0.27564102564102566,
+      "check_rate": 0.7243589743589743,
+      "requests": {
+        "count": 468,
+        "rate": 14.662222887190094
+      },
+      "iterations": {
+        "count": 468,
+        "rate": 14.662222887190094
+      },
+      "dropped": 751,
+      "vus": {
+        "value": 59,
+        "min": 33,
+        "max": 60
+      },
+      "endpoints": {
+        "availability": {
+          "count": 192,
+          "p95": 4068.8510871499993,
+          "p99": 4469.835488029999,
+          "avg": 3339.948917338542
+        },
+        "create": {
+          "count": 147,
+          "p95": 2629.1693291999995,
+          "p99": 2894.62880348,
+          "avg": 2132.574651054422
+        },
+        "list": {
+          "count": 129,
+          "p95": 6001.7757752,
+          "p99": 6003.27524024,
+          "avg": 5996.118727108527
+        }
+      },
+      "phase_counts": {
+        "carga": 468
+      },
+      "status_codes": {
+        "200": 192,
+        "201": 147,
+        "0": 129
+      },
+      "failed_thresholds": [
+        "http_req_failed: rate<0.01",
+        "http_req_failed: rate<0.10",
+        "checks: rate==1",
+        "http_req_duration{endpoint:list}: p(95)<250",
+        "http_req_duration{endpoint:create}: p(95)<250",
+        "dropped_iterations: count==0",
+        "http_req_duration: p(95)<200",
+        "http_req_duration: p(99)<500",
+        "http_req_duration: p(99)<5000",
+        "http_req_duration{endpoint:availability}: p(95)<150"
+      ],
+      "recovery": {},
+      "resources": {
+        "reservaflow-api": {
+          "cpu_avg": 8.581666666666667,
+          "cpu_max": 10.97,
+          "memory_pct_max": 11.22,
+          "memory_MiB_max": 28.71
+        },
+        "reservaflow-db": {
+          "cpu_avg": 100.78833333333333,
+          "cpu_max": 104.48,
+          "memory_pct_max": 30.47,
+          "memory_MiB_max": 156.0
+        },
+        "reservaflow-k6-eval": {
+          "cpu_avg": 4.236666666666666,
+          "cpu_max": 6.38,
+          "memory_pct_max": 13.46,
+          "memory_MiB_max": 34.47
+        }
+      },
+      "host_free_MiB_min": 608.70703125,
+      "resource_samples": 6,
+      "early_window_diagnostic": {
+        "interval_from_docker_start": "2<=t<17 seconds",
+        "samples": 207,
+        "p95": 6000.5327197999995,
+        "note": "Diagnostico exploratorio; ventana de finalizacion desde arranque Docker, no comparación causal equivalente"
+      }
+    },
+    "v1-recovery-safe": {
+      "name": "v1-recovery-safe",
+      "meta": {
+        "name": "v1-recovery-safe",
+        "script": "warmup.js",
+        "started": "2026-11-15T06:41:08.749Z",
+        "ended": "2026-11-15T06:41:41.268Z",
+        "seconds": 32.519,
+        "exitCode": 0,
+        "stopReasons": [],
+        "cancelled": false,
+        "integrity": {
+          "overbooked": 0,
+          "resources": 50,
+          "reservations": 289897
+        }
+      },
+      "latency": {
+        "avg": 59.43543522222222,
+        "min": 25.227876,
+        "med": 49.164497999999995,
+        "max": 192.052692,
+        "p(90)": 91.4377279,
+        "p(95)": 115.60354899999979,
+        "p(99)": 177.13462034999998,
+        "thresholds": {
+          "p(95)<300": false
+        }
+      },
+      "error_rate": 0,
+      "check_rate": 1,
+      "requests": {
+        "count": 54,
+        "rate": 1.7835353243302527
+      },
+      "iterations": {
+        "count": 54,
+        "rate": 1.7835353243302527
+      },
+      "dropped": null,
+      "vus": {
+        "value": 1,
+        "min": 1,
+        "max": 1
+      },
+      "endpoints": {
+        "availability": {
+          "count": 24,
+          "p95": 52.67269215,
+          "p99": 55.25091702,
+          "avg": 41.90879545833333
+        },
+        "list": {
+          "count": 15,
+          "p95": 172.3495785,
+          "p99": 188.11206929999997,
+          "avg": 99.5875618
+        },
+        "create": {
+          "count": 15,
+          "p95": 57.7177045,
+          "p99": 58.4144201,
+          "avg": 47.32593226666667
+        }
+      },
+      "phase_counts": {
+        "recuperacion_posterior": 54
+      },
+      "status_codes": {
+        "200": 39,
+        "201": 15
+      },
+      "failed_thresholds": [],
+      "recovery": {},
+      "resources": {
+        "reservaflow-api": {
+          "cpu_avg": 2.534,
+          "cpu_max": 5.84,
+          "memory_pct_max": 9.54,
+          "memory_MiB_max": 24.41
+        },
+        "reservaflow-db": {
+          "cpu_avg": 19.922,
+          "cpu_max": 25.95,
+          "memory_pct_max": 27.83,
+          "memory_MiB_max": 142.5
+        },
+        "reservaflow-k6-eval": {
+          "cpu_avg": 1.748,
+          "cpu_max": 1.95,
+          "memory_pct_max": 6.48,
+          "memory_MiB_max": 16.6
+        }
+      },
+      "host_free_MiB_min": 336.1328125,
+      "resource_samples": 6,
+      "early_window_diagnostic": {
+        "interval_from_docker_start": "2<=t<17 seconds",
+        "samples": 27,
+        "p95": 125.10124119999998,
+        "note": "Diagnostico exploratorio; ventana de finalizacion desde arranque Docker, no comparación causal equivalente"
+      }
+    },
+    "v1-smoke": {
+      "name": "v1-smoke",
+      "meta": {
+        "name": "v1-smoke",
+        "script": "smoke.js",
+        "started": "2026-11-15T06:29:06.004Z",
+        "ended": "2026-11-15T06:29:38.300Z",
+        "seconds": 32.296,
+        "exitCode": 0,
+        "stopReasons": [],
+        "cancelled": false,
+        "integrity": {
+          "overbooked": 0,
+          "resources": 50,
+          "reservations": 289890
+        }
+      },
+      "latency": {
+        "avg": 14.413801422413796,
+        "min": 0.582004,
+        "med": 2.3622864999999997,
+        "max": 64.697896,
+        "p(90)": 42.633694500000004,
+        "p(95)": 47.631147,
+        "p(99)": 60.137978549999964,
+        "thresholds": {
+          "p(95)<2000": false
+        }
+      },
+      "error_rate": 0,
+      "check_rate": 1,
+      "requests": {
+        "count": 116,
+        "rate": 3.773732361981308
+      },
+      "iterations": {
+        "count": 29,
+        "rate": 0.943433090495327
+      },
+      "dropped": null,
+      "vus": {
+        "value": 1,
+        "min": 1,
+        "max": 1
+      },
+      "endpoints": {
+        "health": {
+          "count": 29,
+          "p95": 2.1849578000000003,
+          "p99": 2.38014148,
+          "avg": 1.7636893793103448
+        },
+        "availability": {
+          "count": 12,
+          "p95": 37.305262849999984,
+          "p99": 45.391350970000005,
+          "avg": 24.711242583333334
+        },
+        "overbooking": {
+          "count": 29,
+          "p95": 32.26648920000001,
+          "p99": 49.63743047999998,
+          "avg": 20.07210251724138
+        },
+        "invalid": {
+          "count": 29,
+          "p95": 1.0200258,
+          "p99": 1.0647256399999998,
+          "avg": 0.7475645862068966
+        },
+        "list": {
+          "count": 9,
+          "p95": 63.2047284,
+          "p99": 64.39926248,
+          "avg": 51.199647222222225
+        },
+        "create": {
+          "count": 8,
+          "p95": 45.372203150000004,
+          "p99": 46.03179103,
+          "avg": 32.468986375
+        }
+      },
+      "phase_counts": {
+        "other": 87,
+        "humo": 29
+      },
+      "status_codes": {
+        "200": 50,
+        "409": 29,
+        "400": 29,
+        "201": 8
+      },
+      "failed_thresholds": [],
+      "recovery": {},
+      "resources": {
+        "reservaflow-api": {
+          "cpu_avg": 1.915,
+          "cpu_max": 3.35,
+          "memory_pct_max": 6.94,
+          "memory_MiB_max": 17.77
+        },
+        "reservaflow-db": {
+          "cpu_avg": 8.296666666666667,
+          "cpu_max": 13.12,
+          "memory_pct_max": 23.43,
+          "memory_MiB_max": 120.0
+        },
+        "reservaflow-k6-eval": {
+          "cpu_avg": 1.425,
+          "cpu_max": 1.48,
+          "memory_pct_max": 6.07,
+          "memory_MiB_max": 15.54
+        }
+      },
+      "host_free_MiB_min": 452.7734375,
+      "resource_samples": 6,
+      "early_window_diagnostic": {
+        "interval_from_docker_start": "2<=t<17 seconds",
+        "samples": 56,
+        "p95": 54.2055825,
+        "note": "Diagnostico exploratorio; ventana de finalizacion desde arranque Docker, no comparación causal equivalente"
+      }
+    },
+    "v1-stress-warmup": {
+      "name": "v1-stress-warmup",
+      "meta": {
+        "name": "v1-stress-warmup",
+        "script": "warmup.js",
+        "started": "2026-11-15T06:38:46.720Z",
+        "ended": "2026-11-15T06:39:03.979Z",
+        "seconds": 17.259,
+        "exitCode": 0,
+        "stopReasons": [],
+        "cancelled": false,
+        "integrity": {
+          "overbooked": 0,
+          "resources": 50,
+          "reservations": 289889
+        }
+      },
+      "latency": {
+        "min": 24.579375,
+        "med": 30.951811,
+        "max": 100.971587,
+        "p(90)": 67.88824340000001,
+        "p(95)": 77.23573359999999,
+        "p(99)": 95.90407742000001,
+        "avg": 44.811405642857146,
+        "thresholds": {
+          "p(95)<300": false
+        }
+      },
+      "error_rate": 0,
+      "check_rate": 1,
+      "requests": {
+        "count": 28,
+        "rate": 1.8319894752728072
+      },
+      "iterations": {
+        "count": 28,
+        "rate": 1.8319894752728072
+      },
+      "dropped": null,
+      "vus": {
+        "min": 1,
+        "max": 1,
+        "value": 1
+      },
+      "endpoints": {
+        "availability": {
+          "count": 12,
+          "p95": 72.41512114999996,
+          "p99": 95.26029383000002,
+          "avg": 35.94496041666667
+        },
+        "list": {
+          "count": 9,
+          "p95": 76.5261194,
+          "p99": 81.06765028000001,
+          "avg": 67.55782666666667
+        },
+        "create": {
+          "count": 7,
+          "p95": 42.559996100000006,
+          "p99": 46.56952322000001,
+          "avg": 30.76562757142857
+        }
+      },
+      "phase_counts": {
+        "calentamiento": 28
+      },
+      "status_codes": {
+        "200": 21,
+        "201": 7
+      },
+      "failed_thresholds": [],
+      "recovery": {},
+      "resources": {
+        "reservaflow-api": {
+          "cpu_avg": 0.94,
+          "cpu_max": 1.03,
+          "memory_pct_max": 5.85,
+          "memory_MiB_max": 14.98
+        },
+        "reservaflow-db": {
+          "cpu_avg": 10.0,
+          "cpu_max": 12.36,
+          "memory_pct_max": 23.51,
+          "memory_MiB_max": 120.4
+        },
+        "reservaflow-k6-eval": {
+          "cpu_avg": 1.165,
+          "cpu_max": 1.18,
+          "memory_pct_max": 5.05,
+          "memory_MiB_max": 12.93
+        }
+      },
+      "host_free_MiB_min": 470.015625,
+      "resource_samples": 3,
+      "early_window_diagnostic": {
+        "interval_from_docker_start": "2<=t<17 seconds",
+        "samples": 26,
+        "p95": 67.966997,
+        "note": "Diagnostico exploratorio; ventana de finalizacion desde arranque Docker, no comparación causal equivalente"
+      }
+    },
+    "v1-stress": {
+      "name": "v1-stress",
+      "meta": {
+        "name": "v1-stress",
+        "script": "stress_recovery.js",
+        "started": "2026-11-15T06:39:48.339Z",
+        "ended": "2026-11-15T06:41:05.430Z",
+        "seconds": 77.091,
+        "exitCode": 99,
+        "stopReasons": [],
+        "cancelled": false,
+        "integrity": {
+          "overbooked": 0,
+          "resources": 50,
+          "reservations": 290059
+        }
+      },
+      "latency": {
+        "min": 15.415703,
+        "med": 648.1972,
+        "max": 6001.504474,
+        "p(90)": 1647.832735,
+        "p(95)": 3400.5509715,
+        "p(99)": 5530.10513489997,
+        "avg": 831.4332509457097,
+        "thresholds": {
+          "p(99)<5000": true
+        }
+      },
+      "error_rate": 0.010507880910683012,
+      "check_rate": 0.989492119089317,
+      "requests": {
+        "count": 571,
+        "rate": 7.519895035487678
+      },
+      "iterations": {
+        "count": 571,
+        "rate": 7.519895035487678
+      },
+      "dropped": null,
+      "vus": {
+        "value": 25,
+        "min": 2,
+        "max": 25
+      },
+      "endpoints": {
+        "availability": {
+          "count": 235,
+          "p95": 1199.6802738000001,
+          "p99": 1614.9595881599996,
+          "avg": 485.370246612766
+        },
+        "list": {
+          "count": 162,
+          "p95": 4915.206357749998,
+          "p99": 6000.84684533,
+          "avg": 1587.743412228395
+        },
+        "create": {
+          "count": 174,
+          "p95": 1248.87470265,
+          "p99": 1417.8726187300003,
+          "avg": 594.6663537643678
+        }
+      },
+      "phase_counts": {
+        "base": 134,
+        "subida": 437
+      },
+      "status_codes": {
+        "200": 391,
+        "201": 174,
+        "0": 6
+      },
+      "failed_thresholds": [
+        "http_reqs{phase:recuperacion}: count>20",
+        "checks: rate==1",
+        "http_req_duration: p(99)<5000"
+      ],
+      "recovery": {
+        "http_req_duration{phase:recuperacion}": {
+          "min": 0,
+          "med": 0,
+          "max": 0,
+          "p(90)": 0,
+          "p(95)": 0,
+          "p(99)": 0,
+          "avg": 0,
+          "thresholds": {
+            "p(95)<300": false
+          }
+        },
+        "http_reqs{phase:recuperacion}": {
+          "count": 0,
+          "rate": 0,
+          "thresholds": {
+            "count>20": true
+          }
+        },
+        "http_req_duration{phase:base}": {
+          "p(99)": 252.17148317999994,
+          "avg": 48.30744858955221,
+          "min": 15.987111,
+          "med": 28.800316000000002,
+          "max": 317.070554,
+          "p(90)": 95.65804990000004,
+          "p(95)": 123.32758354999994,
+          "thresholds": {
+            "p(95)<300": false
+          }
+        },
+        "http_req_failed{phase:recuperacion}": {
+          "fails": 0,
+          "passes": 0,
+          "thresholds": {
+            "rate<0.01": false
+          },
+          "value": 0
+        },
+        "http_req_duration{phase:meseta}": {
+          "p(99)": 0,
+          "avg": 0,
+          "min": 0,
+          "med": 0,
+          "max": 0,
+          "p(90)": 0,
+          "p(95)": 0,
+          "thresholds": {
+            "p(95)<5000": false
+          }
+        }
+      },
+      "resources": {
+        "reservaflow-api": {
+          "cpu_avg": 8.823333333333334,
+          "cpu_max": 22.66,
+          "memory_pct_max": 10.28,
+          "memory_MiB_max": 26.31
+        },
+        "reservaflow-db": {
+          "cpu_avg": 81.25266666666667,
+          "cpu_max": 105.0,
+          "memory_pct_max": 30.25,
+          "memory_MiB_max": 154.9
+        },
+        "reservaflow-k6-eval": {
+          "cpu_avg": 3.9006666666666665,
+          "cpu_max": 12.51,
+          "memory_pct_max": 11.04,
+          "memory_MiB_max": 28.27
+        }
+      },
+      "host_free_MiB_min": 461.625,
+      "resource_samples": 15,
+      "early_window_diagnostic": {
+        "interval_from_docker_start": "2<=t<17 seconds",
+        "samples": 97,
+        "p95": 209.31041500000006,
+        "note": "Diagnostico exploratorio; ventana de finalizacion desde arranque Docker, no comparación causal equivalente"
+      }
+    },
+    "v2-load-1-warmup": {
+      "name": "v2-load-1-warmup",
+      "meta": {
+        "name": "v2-load-1-warmup",
+        "script": "warmup.js",
+        "started": "2026-11-15T06:32:03.787Z",
+        "ended": "2026-11-15T06:32:21.026Z",
+        "seconds": 17.239,
+        "exitCode": 0,
+        "stopReasons": [],
+        "cancelled": false,
+        "integrity": {
+          "overbooked": 0,
+          "resources": 50,
+          "reservations": 289891
+        }
+      },
+      "latency": {
+        "p(99)": 14.148851850000003,
+        "avg": 6.772324333333333,
+        "min": 2.496464,
+        "med": 6.0708445,
+        "max": 15.448265,
+        "p(90)": 10.599943000000001,
+        "p(95)": 10.81309945,
+        "thresholds": {
+          "p(95)<300": false
+        }
+      },
+      "error_rate": 0,
+      "check_rate": 1,
+      "requests": {
+        "rate": 1.9673159769987436,
+        "count": 30
+      },
+      "iterations": {
+        "count": 30,
+        "rate": 1.9673159769987436
+      },
+      "dropped": null,
+      "vus": {
+        "value": 1,
+        "min": 1,
+        "max": 1
+      },
+      "endpoints": {
+        "availability": {
+          "count": 12,
+          "p95": 10.490782249999992,
+          "p99": 14.456768450000002,
+          "avg": 6.0346155
+        },
+        "list": {
+          "count": 9,
+          "p95": 8.483059,
+          "p99": 8.660377400000002,
+          "avg": 6.314865111111112
+        },
+        "create": {
+          "count": 9,
+          "p95": 10.8302584,
+          "p99": 10.94007568,
+          "avg": 8.213395333333333
+        }
+      },
+      "phase_counts": {
+        "calentamiento": 30
+      },
+      "status_codes": {
+        "200": 21,
+        "201": 9
+      },
+      "failed_thresholds": [],
+      "recovery": {},
+      "resources": {
+        "reservaflow-api": {
+          "cpu_avg": 0.955,
+          "cpu_max": 1.17,
+          "memory_pct_max": 7.41,
+          "memory_MiB_max": 18.97
+        },
+        "reservaflow-db": {
+          "cpu_avg": 0.385,
+          "cpu_max": 0.39,
+          "memory_pct_max": 23.37,
+          "memory_MiB_max": 119.7
+        },
+        "reservaflow-k6-eval": {
+          "cpu_avg": 1.605,
+          "cpu_max": 1.77,
+          "memory_pct_max": 5.36,
+          "memory_MiB_max": 13.72
+        }
+      },
+      "host_free_MiB_min": 1107.390625,
+      "resource_samples": 3,
+      "early_window_diagnostic": {
+        "interval_from_docker_start": "2<=t<17 seconds",
+        "samples": 27,
+        "p95": 10.616215,
+        "note": "Diagnostico exploratorio; ventana de finalizacion desde arranque Docker, no comparación causal equivalente"
+      }
+    },
+    "v2-load-1": {
+      "name": "v2-load-1",
+      "meta": {
+        "name": "v2-load-1",
+        "script": "load.js",
+        "started": "2026-11-15T06:32:24.251Z",
+        "ended": "2026-11-15T06:34:26.676Z",
+        "seconds": 122.425,
+        "exitCode": 0,
+        "stopReasons": [],
+        "cancelled": false,
+        "integrity": {
+          "overbooked": 0,
+          "resources": 50,
+          "reservations": 291322
+        }
+      },
+      "latency": {
+        "avg": 4.297135001250003,
+        "min": 0.240024,
+        "med": 3.945406,
+        "max": 62.322675,
+        "p(90)": 6.831475100000001,
+        "p(95)": 7.606705850000001,
+        "p(99)": 9.025818750000003,
+        "thresholds": {
+          "p(95)<200": false,
+          "p(99)<500": false,
+          "p(99)<5000": false
+        }
+      },
+      "error_rate": 0,
+      "check_rate": 1,
+      "requests": {
+        "count": 4800,
+        "rate": 40.025044705786904
+      },
+      "iterations": {
+        "count": 4800,
+        "rate": 40.025044705786904
+      },
+      "dropped": 0,
+      "vus": {
+        "value": 1,
+        "min": 1,
+        "max": 1
+      },
+      "endpoints": {
+        "availability": {
+          "count": 1920,
+          "p95": 4.5042849,
+          "p99": 5.198862609999999,
+          "avg": 3.10708168125
+        },
+        "list": {
+          "count": 1440,
+          "p95": 5.686467199999999,
+          "p99": 6.613347479999999,
+          "avg": 3.9301468847222223
+        },
+        "create": {
+          "count": 1440,
+          "p95": 8.7270536,
+          "p99": 9.950687489999988,
+          "avg": 6.250860877777778
+        }
+      },
+      "phase_counts": {
+        "carga": 4800
+      },
+      "status_codes": {
+        "200": 3360,
+        "201": 1440
+      },
+      "failed_thresholds": [],
+      "recovery": {},
+      "resources": {
+        "reservaflow-api": {
+          "cpu_avg": 9.431304347826087,
+          "cpu_max": 11.45,
+          "memory_pct_max": 11.17,
+          "memory_MiB_max": 28.6
+        },
+        "reservaflow-db": {
+          "cpu_avg": 5.813478260869565,
+          "cpu_max": 8.43,
+          "memory_pct_max": 24.25,
+          "memory_MiB_max": 124.2
+        },
+        "reservaflow-k6-eval": {
+          "cpu_avg": 7.583913043478261,
+          "cpu_max": 11.21,
+          "memory_pct_max": 15.42,
+          "memory_MiB_max": 39.47
+        }
+      },
+      "host_free_MiB_min": 877.65625,
+      "resource_samples": 24,
+      "early_window_diagnostic": {
+        "interval_from_docker_start": "2<=t<17 seconds",
+        "samples": 600,
+        "p95": 7.129084699999998,
+        "note": "Diagnostico exploratorio; ventana de finalizacion desde arranque Docker, no comparación causal equivalente"
+      }
+    },
+    "v2-load-2-warmup": {
+      "name": "v2-load-2-warmup",
+      "meta": {
+        "name": "v2-load-2-warmup",
+        "script": "warmup.js",
+        "started": "2026-11-15T06:34:42.989Z",
+        "ended": "2026-11-15T06:35:00.319Z",
+        "seconds": 17.33,
+        "exitCode": 0,
+        "stopReasons": [],
+        "cancelled": false,
+        "integrity": {
+          "overbooked": 0,
+          "resources": 50,
+          "reservations": 289891
+        }
+      },
+      "latency": {
+        "med": 7.179962,
+        "max": 39.317843,
+        "p(90)": 10.329985700000003,
+        "p(95)": 17.59252494999997,
+        "p(99)": 34.452876660000015,
+        "avg": 8.564320299999999,
+        "min": 3.478526,
+        "thresholds": {
+          "p(95)<300": false
+        }
+      },
+      "error_rate": 0,
+      "check_rate": 1,
+      "requests": {
+        "rate": 1.9631243578317168,
+        "count": 30
+      },
+      "iterations": {
+        "count": 30,
+        "rate": 1.9631243578317168
+      },
+      "dropped": null,
+      "vus": {
+        "value": 1,
+        "min": 1,
+        "max": 1
+      },
+      "endpoints": {
+        "availability": {
+          "count": 12,
+          "p95": 22.55727444999998,
+          "p99": 35.96572929000002,
+          "avg": 8.903712500000001
+        },
+        "list": {
+          "count": 9,
+          "p95": 8.3849704,
+          "p99": 8.526350879999999,
+          "avg": 6.561600555555556
+        },
+        "create": {
+          "count": 9,
+          "p95": 18.142477399999997,
+          "p99": 21.662173079999995,
+          "avg": 10.11451711111111
+        }
+      },
+      "phase_counts": {
+        "calentamiento": 30
+      },
+      "status_codes": {
+        "200": 21,
+        "201": 9
+      },
+      "failed_thresholds": [],
+      "recovery": {},
+      "resources": {
+        "reservaflow-api": {
+          "cpu_avg": 0.73,
+          "cpu_max": 0.88,
+          "memory_pct_max": 5.84,
+          "memory_MiB_max": 14.96
+        },
+        "reservaflow-db": {
+          "cpu_avg": 1.555,
+          "cpu_max": 2.8,
+          "memory_pct_max": 23.4,
+          "memory_MiB_max": 119.8
+        },
+        "reservaflow-k6-eval": {
+          "cpu_avg": 1.44,
+          "cpu_max": 1.49,
+          "memory_pct_max": 6.14,
+          "memory_MiB_max": 15.71
+        }
+      },
+      "host_free_MiB_min": 846.21484375,
+      "resource_samples": 3,
+      "early_window_diagnostic": {
+        "interval_from_docker_start": "2<=t<17 seconds",
+        "samples": 27,
+        "p95": 11.1386939,
+        "note": "Diagnostico exploratorio; ventana de finalizacion desde arranque Docker, no comparación causal equivalente"
+      }
+    },
+    "v2-load-2": {
+      "name": "v2-load-2",
+      "meta": {
+        "name": "v2-load-2",
+        "script": "load.js",
+        "started": "2026-11-15T06:35:03.657Z",
+        "ended": "2026-11-15T06:37:06.104Z",
+        "seconds": 122.447,
+        "exitCode": 0,
+        "stopReasons": [],
+        "cancelled": false,
+        "integrity": {
+          "overbooked": 0,
+          "resources": 50,
+          "reservations": 291322
+        }
+      },
+      "latency": {
+        "p(95)": 6.958933,
+        "p(99)": 8.88079,
+        "avg": 3.9559829791710017,
+        "min": 1.5768,
+        "med": 3.531141,
+        "max": 56.42357,
+        "p(90)": 6.0907,
+        "thresholds": {
+          "p(99)<5000": false,
+          "p(95)<200": false,
+          "p(99)<500": false
+        }
+      },
+      "error_rate": 0,
+      "check_rate": 1,
+      "requests": {
+        "count": 4801,
+        "rate": 40.03183900872096
+      },
+      "iterations": {
+        "count": 4801,
+        "rate": 40.03183900872096
+      },
+      "dropped": 0,
+      "vus": {
+        "value": 0,
+        "min": 0,
+        "max": 0
+      },
+      "endpoints": {
+        "availability": {
+          "count": 1921,
+          "p95": 4.379588,
+          "p99": 5.110511199999995,
+          "avg": 2.8757859302446644
+        },
+        "list": {
+          "count": 1440,
+          "p95": 5.41135955,
+          "p99": 6.168338209999996,
+          "avg": 3.6116336506944444
+        },
+        "create": {
+          "count": 1440,
+          "p95": 8.1376247,
+          "p99": 12.005708089999985,
+          "avg": 5.741345176388889
+        }
+      },
+      "phase_counts": {
+        "carga": 4801
+      },
+      "status_codes": {
+        "200": 3361,
+        "201": 1440
+      },
+      "failed_thresholds": [],
+      "recovery": {},
+      "resources": {
+        "reservaflow-api": {
+          "cpu_avg": 8.651304347826088,
+          "cpu_max": 12.05,
+          "memory_pct_max": 10.64,
+          "memory_MiB_max": 27.24
+        },
+        "reservaflow-db": {
+          "cpu_avg": 5.750869565217391,
+          "cpu_max": 8.18,
+          "memory_pct_max": 24.26,
+          "memory_MiB_max": 124.2
+        },
+        "reservaflow-k6-eval": {
+          "cpu_avg": 7.39695652173913,
+          "cpu_max": 13.26,
+          "memory_pct_max": 16.17,
+          "memory_MiB_max": 41.4
+        }
+      },
+      "host_free_MiB_min": 608.7578125,
+      "resource_samples": 24,
+      "early_window_diagnostic": {
+        "interval_from_docker_start": "2<=t<17 seconds",
+        "samples": 600,
+        "p95": 7.42099375,
+        "note": "Diagnostico exploratorio; ventana de finalizacion desde arranque Docker, no comparación causal equivalente"
+      }
+    },
+    "v2-smoke": {
+      "name": "v2-smoke",
+      "meta": {
+        "name": "v2-smoke",
+        "script": "smoke.js",
+        "started": "2026-11-15T06:31:17.873Z",
+        "ended": "2026-11-15T06:31:50.339Z",
+        "seconds": 32.466,
+        "exitCode": 0,
+        "stopReasons": [],
+        "cancelled": false,
+        "integrity": {
+          "overbooked": 0,
+          "resources": 50,
+          "reservations": 289891
+        }
+      },
+      "latency": {
+        "p(95)": 9.159724849999998,
+        "p(99)": 10.3238868,
+        "avg": 3.0147488583333333,
+        "min": 0.519329,
+        "med": 2.316479,
+        "max": 22.002991,
+        "p(90)": 6.091963000000001,
+        "thresholds": {
+          "p(95)<2000": false
+        }
+      },
+      "error_rate": 0,
+      "check_rate": 1,
+      "requests": {
+        "count": 120,
+        "rate": 3.9462531331989132
+      },
+      "iterations": {
+        "count": 30,
+        "rate": 0.9865632832997283
+      },
+      "dropped": null,
+      "vus": {
+        "min": 1,
+        "max": 1,
+        "value": 1
+      },
+      "endpoints": {
+        "health": {
+          "count": 30,
+          "p95": 2.47152775,
+          "p99": 2.9312895500000002,
+          "avg": 1.6911281333333332
+        },
+        "availability": {
+          "count": 12,
+          "p95": 13.409053449999991,
+          "p99": 20.28420349000001,
+          "avg": 6.271522
+        },
+        "overbooking": {
+          "count": 30,
+          "p95": 3.7646193500000003,
+          "p99": 5.110139940000002,
+          "avg": 3.0484268666666665
+        },
+        "invalid": {
+          "count": 30,
+          "p95": 0.92604755,
+          "p99": 1.2762929700000005,
+          "avg": 0.7236518666666667
+        },
+        "list": {
+          "count": 9,
+          "p95": 9.1041116,
+          "p99": 9.372708719999999,
+          "avg": 5.571007
+        },
+        "create": {
+          "count": 9,
+          "p95": 10.293084,
+          "p99": 10.3400216,
+          "avg": 8.052925555555555
+        }
+      },
+      "phase_counts": {
+        "other": 90,
+        "humo": 30
+      },
+      "status_codes": {
+        "200": 51,
+        "409": 30,
+        "400": 30,
+        "201": 9
+      },
+      "failed_thresholds": [],
+      "recovery": {},
+      "resources": {
+        "reservaflow-api": {
+          "cpu_avg": 1.0979999999999999,
+          "cpu_max": 1.41,
+          "memory_pct_max": 7.37,
+          "memory_MiB_max": 18.88
+        },
+        "reservaflow-db": {
+          "cpu_avg": 0.964,
+          "cpu_max": 3.66,
+          "memory_pct_max": 23.34,
+          "memory_MiB_max": 119.5
+        },
+        "reservaflow-k6-eval": {
+          "cpu_avg": 1.652,
+          "cpu_max": 2.67,
+          "memory_pct_max": 5.42,
+          "memory_MiB_max": 13.87
+        }
+      },
+      "host_free_MiB_min": 693.9140625,
+      "resource_samples": 6,
+      "early_window_diagnostic": {
+        "interval_from_docker_start": "2<=t<17 seconds",
+        "samples": 60,
+        "p95": 8.627716449999998,
+        "note": "Diagnostico exploratorio; ventana de finalizacion desde arranque Docker, no comparación causal equivalente"
+      }
+    },
+    "v2-stress-warmup": {
+      "name": "v2-stress-warmup",
+      "meta": {
+        "name": "v2-stress-warmup",
+        "script": "warmup.js",
+        "started": "2026-11-15T06:42:15.725Z",
+        "ended": "2026-11-15T06:42:33.332Z",
+        "seconds": 17.607,
+        "exitCode": 0,
+        "stopReasons": [],
+        "cancelled": false,
+        "integrity": {
+          "overbooked": 0,
+          "resources": 50,
+          "reservations": 289890
+        }
+      },
+      "latency": {
+        "p(95)": 95.37719039999975,
+        "p(99)": 145.44264768,
+        "avg": 19.442266068965516,
+        "min": 4.293877,
+        "med": 10.219854,
+        "max": 146.319529,
+        "p(90)": 16.985476199999994,
+        "thresholds": {
+          "p(95)<300": false
+        }
+      },
+      "error_rate": 0,
+      "check_rate": 1,
+      "requests": {
+        "count": 29,
+        "rate": 1.9198705698997358
+      },
+      "iterations": {
+        "count": 29,
+        "rate": 1.9198705698997358
+      },
+      "dropped": null,
+      "vus": {
+        "min": 1,
+        "max": 1,
+        "value": 1
+      },
+      "endpoints": {
+        "availability": {
+          "count": 12,
+          "p95": 70.05543419999991,
+          "p99": 128.5613348400001,
+          "avg": 19.20690516666667
+        },
+        "list": {
+          "count": 9,
+          "p95": 19.254360599999995,
+          "p99": 22.779880919999997,
+          "avg": 10.87854711111111
+        },
+        "create": {
+          "count": 8,
+          "p95": 100.46847935000004,
+          "p99": 137.14931906999993,
+          "avg": 29.429491249999998
+        }
+      },
+      "phase_counts": {
+        "calentamiento": 29
+      },
+      "status_codes": {
+        "200": 21,
+        "201": 8
+      },
+      "failed_thresholds": [],
+      "recovery": {},
+      "resources": {
+        "reservaflow-api": {
+          "cpu_avg": 1.4,
+          "cpu_max": 1.86,
+          "memory_pct_max": 5.77,
+          "memory_MiB_max": 14.78
+        },
+        "reservaflow-db": {
+          "cpu_avg": 0.345,
+          "cpu_max": 0.35,
+          "memory_pct_max": 23.33,
+          "memory_MiB_max": 119.4
+        },
+        "reservaflow-k6-eval": {
+          "cpu_avg": 1.62,
+          "cpu_max": 1.65,
+          "memory_pct_max": 5.77,
+          "memory_MiB_max": 14.78
+        }
+      },
+      "host_free_MiB_min": 369.6875,
+      "resource_samples": 3,
+      "early_window_diagnostic": {
+        "interval_from_docker_start": "2<=t<17 seconds",
+        "samples": 27,
+        "p95": 21.157841699999995,
+        "note": "Diagnostico exploratorio; ventana de finalizacion desde arranque Docker, no comparación causal equivalente"
+      }
+    },
+    "v2-stress": {
+      "name": "v2-stress",
+      "meta": {
+        "name": "v2-stress",
+        "script": "stress_recovery.js",
+        "started": "2026-11-15T06:42:37.964Z",
+        "ended": "2026-11-15T06:45:39.585Z",
+        "seconds": 181.621,
+        "exitCode": 0,
+        "stopReasons": [],
+        "cancelled": false,
+        "integrity": {
+          "overbooked": 0,
+          "resources": 50,
+          "reservations": 292489
+        }
+      },
+      "latency": {
+        "min": 1.012487,
+        "med": 7.341314,
+        "max": 152.461409,
+        "p(90)": 14.705076000000005,
+        "p(95)": 18.102259199999992,
+        "p(99)": 30.345235119999995,
+        "avg": 8.896407399793052,
+        "thresholds": {
+          "p(99)<5000": false
+        }
+      },
+      "error_rate": 0,
+      "check_rate": 1,
+      "requests": {
+        "count": 8697,
+        "rate": 48.266280504575874
+      },
+      "iterations": {
+        "count": 8697,
+        "rate": 48.266280504575874
+      },
+      "dropped": null,
+      "vus": {
+        "max": 40,
+        "value": 1,
+        "min": 1
+      },
+      "endpoints": {
+        "availability": {
+          "count": 3480,
+          "p95": 13.470304100000007,
+          "p99": 24.193082510000007,
+          "avg": 6.427937986206897
+        },
+        "list": {
+          "count": 2610,
+          "p95": 14.652391850000004,
+          "p99": 21.90753789999999,
+          "avg": 7.925060811877395
+        },
+        "create": {
+          "count": 2607,
+          "p95": 23.34223809999999,
+          "p99": 40.897861360000014,
+          "avg": 13.163951762562332
+        }
+      },
+      "phase_counts": {
+        "base": 154,
+        "subida": 4231,
+        "meseta": 3042,
+        "descenso": 827,
+        "recuperacion": 385,
+        "cierre": 58
+      },
+      "status_codes": {
+        "200": 6090,
+        "201": 2607
+      },
+      "failed_thresholds": [],
+      "recovery": {
+        "http_req_duration{phase:meseta}": {
+          "max": 83.846903,
+          "p(90)": 17.958900500000002,
+          "p(95)": 22.470461199999974,
+          "p(99)": 36.462577060000044,
+          "avg": 10.968009773832996,
+          "min": 1.012487,
+          "med": 9.6841475,
+          "thresholds": {
+            "p(95)<5000": false
+          }
+        },
+        "http_req_duration{phase:base}": {
+          "avg": 8.587895363636365,
+          "min": 3.301888,
+          "med": 6.844882,
+          "max": 69.658836,
+          "p(90)": 12.7209923,
+          "p(95)": 13.863982649999999,
+          "p(99)": 40.92040631999995,
+          "thresholds": {
+            "p(95)<300": false
+          }
+        },
+        "http_req_failed{phase:recuperacion}": {
+          "passes": 0,
+          "fails": 385,
+          "thresholds": {
+            "rate<0.01": false
+          },
+          "value": 0
+        },
+        "http_req_duration{phase:recuperacion}": {
+          "avg": 7.464364187012982,
+          "min": 2.658675,
+          "med": 6.633539,
+          "max": 16.818614,
+          "p(90)": 11.529886000000001,
+          "p(95)": 12.3001648,
+          "p(99)": 14.513728039999995,
+          "thresholds": {
+            "p(95)<300": false
+          }
+        },
+        "http_reqs{phase:recuperacion}": {
+          "count": 385,
+          "rate": 2.136658387290067,
+          "thresholds": {
+            "count>20": false
+          }
+        }
+      },
+      "resources": {
+        "reservaflow-api": {
+          "cpu_avg": 15.906,
+          "cpu_max": 40.89,
+          "memory_pct_max": 10.76,
+          "memory_MiB_max": 27.54
+        },
+        "reservaflow-db": {
+          "cpu_avg": 11.820285714285713,
+          "cpu_max": 38.83,
+          "memory_pct_max": 27.64,
+          "memory_MiB_max": 141.5
+        },
+        "reservaflow-k6-eval": {
+          "cpu_avg": 12.954857142857144,
+          "cpu_max": 35.14,
+          "memory_pct_max": 14.64,
+          "memory_MiB_max": 37.47
+        }
+      },
+      "host_free_MiB_min": 457.55859375,
+      "resource_samples": 36,
+      "early_window_diagnostic": {
+        "interval_from_docker_start": "2<=t<17 seconds",
+        "samples": 115,
+        "p95": 14.175066099999999,
+        "note": "Diagnostico exploratorio; ventana de finalizacion desde arranque Docker, no comparación causal equivalente"
+      }
+    }
+  },
+  "initial": {
+    "v1-load-1.initial.json": {
+      "sha256": "0614321fe2c98231828f442cc3c70c0c8d927b38acc5de2ca7e165f615aa5a0e",
+      "distribution": "cancelled|58091\nconfirmed|202731\npending|29060\n",
+      "indexes": "reservations_pkey\n"
+    },
+    "v1-load-2.initial.json": {
+      "sha256": "0614321fe2c98231828f442cc3c70c0c8d927b38acc5de2ca7e165f615aa5a0e",
+      "distribution": "cancelled|58091\nconfirmed|202731\npending|29060\n",
+      "indexes": "reservations_pkey\n"
+    },
+    "v1-stress.initial.json": {
+      "sha256": "0614321fe2c98231828f442cc3c70c0c8d927b38acc5de2ca7e165f615aa5a0e",
+      "distribution": "cancelled|58091\nconfirmed|202731\npending|29060\n",
+      "indexes": "reservations_pkey\n"
+    },
+    "v2-load-1.initial.json": {
+      "sha256": "0614321fe2c98231828f442cc3c70c0c8d927b38acc5de2ca7e165f615aa5a0e",
+      "distribution": "cancelled|58091\nconfirmed|202731\npending|29060\n",
+      "indexes": "idx_reservations_date\nidx_reservations_lookup\nidx_reservations_status_date\nreservations_pkey\n"
+    },
+    "v2-load-2.initial.json": {
+      "sha256": "0614321fe2c98231828f442cc3c70c0c8d927b38acc5de2ca7e165f615aa5a0e",
+      "distribution": "cancelled|58091\nconfirmed|202731\npending|29060\n",
+      "indexes": "idx_reservations_date\nidx_reservations_lookup\nidx_reservations_status_date\nreservations_pkey\n"
+    },
+    "v2-stress.initial.json": {
+      "sha256": "0614321fe2c98231828f442cc3c70c0c8d927b38acc5de2ca7e165f615aa5a0e",
+      "distribution": "cancelled|58091\nconfirmed|202731\npending|29060\n",
+      "indexes": "idx_reservations_date\nidx_reservations_lookup\nidx_reservations_status_date\nreservations_pkey\n"
+    }
+  },
+  "seed_check_complete": true,
+  "identical_seed": true
+}

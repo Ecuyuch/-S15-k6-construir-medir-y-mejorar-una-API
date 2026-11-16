@@ -1,0 +1,45 @@
+
+
+  █ THRESHOLDS 
+
+    checks
+    ✓ 'rate==1' rate=100.00%
+
+    http_req_duration
+    ✓ 'p(95)<300' p(95)=65.2ms
+
+    http_req_failed
+    ✓ 'rate<0.01' rate=0.00%
+
+
+  █ TOTAL RESULTS 
+
+    checks_total.......................: 56      3.700718/s
+    checks_succeeded...................: 100.00% 56 out of 56
+    checks_failed......................: 0.00%   0 out of 56
+
+    ✓ availability HTTP 200
+    ✓ 12 franjas y capacidad coherente
+    ✓ list HTTP 200
+    ✓ pagina de 50 reservas confirmadas
+    ✓ create HTTP 201
+    ✓ reserva conserva campos
+
+    HTTP
+    http_req_duration.......................................................: avg=34.7ms   min=15.79ms med=27.27ms  max=77.54ms  p(90)=62.85ms  p(95)=65.2ms   p(99)=74.34ms
+      { expected_response:true }............................................: avg=34.7ms   min=15.79ms med=27.27ms  max=77.54ms  p(90)=62.85ms  p(95)=65.2ms   p(99)=74.34ms
+    http_req_failed.........................................................: 0.00%  0 out of 28
+    http_reqs...............................................................: 28     1.850359/s
+
+    EXECUTION
+    iteration_duration......................................................: avg=540.53ms min=517.2ms med=528.41ms max=707.75ms p(90)=563.83ms p(95)=566.42ms p(99)=669.7ms
+    iterations..............................................................: 28     1.850359/s
+    vus.....................................................................: 1      min=1       max=1
+    vus_max.................................................................: 1      min=1       max=1
+
+    NETWORK
+    data_received...........................................................: 116 kB 7.7 kB/s
+    data_sent...............................................................: 4.4 kB 294 B/s
+
+
+

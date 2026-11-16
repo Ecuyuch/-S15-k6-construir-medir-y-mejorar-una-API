@@ -1,0 +1,49 @@
+
+
+  █ THRESHOLDS 
+
+    checks
+    ✓ 'rate==1' rate=100.00%
+
+    http_req_duration
+    ✓ 'p(95)<2000' p(95)=82.17ms
+
+    http_req_failed
+    ✓ 'rate==0' rate=0.00%
+
+
+  █ TOTAL RESULTS 
+
+    checks_total.......................: 70      4.916056/s
+    checks_succeeded...................: 100.00% 70 out of 70
+    checks_failed......................: 0.00%   0 out of 70
+
+    ✓ health valido
+    ✓ availability HTTP 200
+    ✓ 12 franjas y capacidad coherente
+    ✓ sobrecupo 409
+    ✓ invalido 400
+    ✓ list HTTP 200
+    ✓ pagina de 50 reservas confirmadas
+    ✓ create HTTP 201
+    ✓ reserva conserva campos
+
+    HTTP
+    http_req_duration.......................................................: avg=18.53ms min=719.44µs med=2.98ms max=288.41ms p(90)=20.6ms p(95)=82.17ms p(99)=255.27ms
+      { expected_response:true }............................................: avg=18.53ms min=719.44µs med=2.98ms max=288.41ms p(90)=20.6ms p(95)=82.17ms p(99)=255.27ms
+    http_req_failed.........................................................: 0.00%  0 out of 56
+    http_reqs...............................................................: 56     3.932844/s
+
+    EXECUTION
+    iteration_duration......................................................: avg=1.08s   min=1.01s    med=1.02s  max=1.5s     p(90)=1.26s  p(95)=1.39s   p(99)=1.48s   
+    iterations..............................................................: 13     0.912982/s
+    vus.....................................................................: 1      min=1       max=1
+    vus_max.................................................................: 1      min=1       max=1
+
+    NETWORK
+    data_received...........................................................: 55 kB  3.9 kB/s
+    data_sent...............................................................: 8.5 kB 596 B/s
+
+
+
+time="2026-11-15T05:53:24Z" level=error msg="test run was aborted because k6 received a 'terminated' signal"

@@ -1,0 +1,15 @@
+{
+  "name": "v1-recovery-safe",
+  "script": "warmup.js",
+  "started": "2026-11-15T06:41:08.749Z",
+  "ended": "2026-11-15T06:41:41.268Z",
+  "seconds": 32.519,
+  "exitCode": 0,
+  "stopReasons": [],
+  "cancelled": false,
+  "integrity": {
+    "overbooked": 0,
+    "resources": 50,
+    "reservations": 289897
+  }
+}

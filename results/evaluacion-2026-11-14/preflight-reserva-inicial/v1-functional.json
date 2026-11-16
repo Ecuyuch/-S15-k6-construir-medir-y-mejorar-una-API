@@ -1,0 +1,29 @@
+{
+  "time": "2026-11-15T06:16:51.133Z",
+  "base": "http://127.0.0.1:3001",
+  "version": "v1",
+  "passed": 5,
+  "total": 5,
+  "results": [
+    {
+      "name": "salud y versión",
+      "pass": true
+    },
+    {
+      "name": "paginación no vacía y orden estable",
+      "pass": true
+    },
+    {
+      "name": "400 ante entradas inválidas",
+      "pass": true
+    },
+    {
+      "name": "404 recurso inexistente",
+      "pass": true
+    },
+    {
+      "name": "concurrencia conserva capacidad y rechazo 409",
+      "pass": true
+    }
+  ]
+}

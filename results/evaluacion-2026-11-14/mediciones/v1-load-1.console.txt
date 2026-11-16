@@ -1,0 +1,200 @@
+time="2026-11-15T06:30:14Z" level=warning msg="Insufficient VUs, reached 60 active VUs and cannot initialize more" executor=constant-arrival-rate scenario=normal
+time="2026-11-15T06:30:18Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=1&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:18Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=1&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:18Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=1&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:18Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=2&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:18Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=2&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:18Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=2&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:18Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=3&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:18Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=3&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:18Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=3&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:19Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=4&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:19Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=4&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:19Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=4&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:19Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=5&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:19Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=5&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:19Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=5&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:19Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=6&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:19Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=6&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:19Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=6&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:19Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=7&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:19Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=7&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:19Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=7&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:20Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=8&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:20Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=8&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:20Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=8&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:21Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=9&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:21Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=9&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:21Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=9&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:22Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=10&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:22Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=10&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:22Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=10&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:22Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=11&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:22Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=11&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:22Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=11&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:23Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=12&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:23Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=12&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:23Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=12&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:24Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=13&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:24Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=13&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:24Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=13&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:24Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=14&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:24Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=14&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:24Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=14&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:25Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=15&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:25Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=15&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:25Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=15&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:25Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=16&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:25Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=16&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:25Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=16&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:25Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=17&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:26Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=17&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:26Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=17&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:26Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=18&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:26Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=18&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:26Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=18&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:27Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=19&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:27Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=19&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:27Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=19&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:28Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=20&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:28Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=20&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:28Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=20&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:28Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=1&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:28Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=1&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:28Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=1&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:28Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=2&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:29Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=2&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:29Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=2&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:29Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=3&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:29Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=3&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:29Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=3&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:30Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=4&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:30Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=4&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:30Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=4&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:30Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=5&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:31Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=5&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:31Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=5&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:31Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=6&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:31Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=6&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:31Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=6&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:32Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=7&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:32Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=7&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:32Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=7&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:33Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=8&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:33Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=8&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:33Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=8&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:34Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=9&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:34Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=9&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:34Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=9&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:34Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=10&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:35Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=10&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:35Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=10&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:35Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=11&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:35Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=11&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:35Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=11&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:36Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=12&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:36Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=12&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:36Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=12&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:36Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=13&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:36Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=13&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:36Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=13&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:37Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=14&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:37Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=14&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:37Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=14&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:37Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=15&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:38Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=15&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:38Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=15&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:38Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=16&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:38Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=16&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:38Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=16&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:39Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=17&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:39Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=17&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:39Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=17&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:40Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=18&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:40Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=18&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:40Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=18&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:40Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=19&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:40Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=19&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:40Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=19&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:41Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=20&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:41Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=20&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:41Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=20&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:41Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=1&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:41Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=1&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:42Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=1&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:42Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=2&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:42Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=2&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:42Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=2&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:43Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=3&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:43Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=3&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:43Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=3&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:43Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=4&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:43Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=4&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:43Z" level=warning msg="Request Failed" error="Get \"http://api:3000/reservations?page=4&pageSize=50&status=confirmed\": request timeout"
+time="2026-11-15T06:30:44Z" level=error msg="thresholds on metrics 'checks, dropped_iterations, http_req_duration, http_req_duration{endpoint:availability}, http_req_duration{endpoint:create}, http_req_duration{endpoint:list}, http_req_failed' were crossed; at least one has abortOnFail enabled, stopping test prematurely"
+
+
+  █ THRESHOLDS 
+
+    checks
+    ✗ 'rate==1' rate=73.06%
+
+    dropped_iterations
+    ✗ 'count==0' count=730
+
+    http_req_duration
+    ✗ 'p(95)<200' p(95)=6s
+    ✗ 'p(99)<500' p(99)=6s
+    ✗ 'p(99)<5000' p(99)=6s
+
+      {endpoint:availability}
+      ✗ 'p(95)<150' p(95)=4.16s
+
+      {endpoint:create}
+      ✗ 'p(95)<250' p(95)=2.87s
+
+      {endpoint:list}
+      ✗ 'p(95)<250' p(95)=6s
+
+    http_req_failed
+    ✗ 'rate<0.01' rate=26.93%
+    ✗ 'rate<0.10' rate=26.93%
+
+
+  █ TOTAL RESULTS 
+
+    checks_total.......................: 980    30.640285/s
+    checks_succeeded...................: 73.06% 716 out of 980
+    checks_failed......................: 26.93% 264 out of 980
+
+    ✓ availability HTTP 200
+    ✓ 12 franjas y capacidad coherente
+    ✓ create HTTP 201
+    ✓ reserva conserva campos
+    ✗ list HTTP 200
+      ↳  0% — ✓ 0 / ✗ 132
+    ✗ pagina de 50 reservas confirmadas
+      ↳  0% — ✓ 0 / ✗ 132
+
+    HTTP
+    http_req_duration.......................................................: avg=3.49s min=18.56ms  med=2.97s max=6.01s p(90)=6s    p(95)=6s    p(99)=6s   
+      { endpoint:availability }.............................................: avg=3.04s min=18.56ms  med=3.05s max=4.76s p(90)=3.97s p(95)=4.16s p(99)=4.52s
+      { endpoint:create }...................................................: avg=1.94s min=280.78ms med=1.86s max=3.22s p(90)=2.66s p(95)=2.87s p(99)=3.19s
+      { endpoint:list }.....................................................: avg=5.99s min=5.98s    med=6s    max=6.01s p(90)=6s    p(95)=6s    p(99)=6s   
+      { expected_response:true }............................................: avg=2.57s min=18.56ms  med=2.55s max=4.76s p(90)=3.76s p(95)=4.04s p(99)=4.46s
+    http_req_failed.........................................................: 26.93% 132 out of 490
+    http_reqs...............................................................: 490    15.320143/s
+
+    EXECUTION
+    dropped_iterations......................................................: 730    22.823886/s
+    iteration_duration......................................................: avg=3.49s min=21.39ms  med=2.97s max=6.01s p(90)=6s    p(95)=6s    p(99)=6s   
+    iterations..............................................................: 490    15.320143/s
+    vus.....................................................................: 60     min=30         max=60
+    vus_max.................................................................: 60     min=60         max=60
+
+    NETWORK
+    data_received...........................................................: 251 kB 7.9 kB/s
+    data_sent...............................................................: 90 kB  2.8 kB/s
+
+
+

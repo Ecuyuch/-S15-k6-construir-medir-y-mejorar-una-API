@@ -1,0 +1,215 @@
+[
+  {
+    "time": "2026-11-15T06:41:13.788Z",
+    "elapsedSeconds": 5.039,
+    "hostFreeBytes": 514514944,
+    "hostTotalBytes": 8299257856,
+    "containers": [
+      {
+        "BlockIO": "0B / 0B",
+        "CPUPerc": "0.75%",
+        "Container": "reservaflow-api",
+        "ID": "184b1df4a83f",
+        "MemPerc": "9.54%",
+        "MemUsage": "24.41MiB / 256MiB",
+        "Name": "reservaflow-api",
+        "NetIO": "3.13MB / 4.29MB",
+        "PIDs": "11"
+      },
+      {
+        "BlockIO": "0B / 0B",
+        "CPUPerc": "14.37%",
+        "Container": "reservaflow-db",
+        "ID": "772b8219e722",
+        "MemPerc": "27.83%",
+        "MemUsage": "142.5MiB / 512MiB",
+        "Name": "reservaflow-db",
+        "NetIO": "16.5MB / 43.4MB",
+        "PIDs": "16"
+      },
+      {
+        "BlockIO": "0B / 0B",
+        "CPUPerc": "1.95%",
+        "Container": "reservaflow-k6-eval",
+        "ID": "0585d09d593e",
+        "MemPerc": "4.70%",
+        "MemUsage": "12.02MiB / 256MiB",
+        "Name": "reservaflow-k6-eval",
+        "NetIO": "42.3kB / 3.71kB",
+        "PIDs": "13"
+      }
+    ]
+  },
+  {
+    "time": "2026-11-15T06:41:18.799Z",
+    "elapsedSeconds": 10.05,
+    "hostFreeBytes": 352460800,
+    "hostTotalBytes": 8299257856,
+    "containers": [
+      {
+        "BlockIO": "0B / 0B",
+        "CPUPerc": "0.87%",
+        "Container": "reservaflow-api",
+        "ID": "184b1df4a83f",
+        "MemPerc": "6.11%",
+        "MemUsage": "15.65MiB / 256MiB",
+        "Name": "reservaflow-api",
+        "NetIO": "3.18MB / 4.36MB",
+        "PIDs": "11"
+      },
+      {
+        "BlockIO": "0B / 0B",
+        "CPUPerc": "13.75%",
+        "Container": "reservaflow-db",
+        "ID": "772b8219e722",
+        "MemPerc": "23.79%",
+        "MemUsage": "121.8MiB / 512MiB",
+        "Name": "reservaflow-db",
+        "NetIO": "16.6MB / 43.5MB",
+        "PIDs": "7"
+      },
+      {
+        "BlockIO": "0B / 0B",
+        "CPUPerc": "1.73%",
+        "Container": "reservaflow-k6-eval",
+        "ID": "0585d09d593e",
+        "MemPerc": "5.21%",
+        "MemUsage": "13.33MiB / 256MiB",
+        "Name": "reservaflow-k6-eval",
+        "NetIO": "82.6kB / 6.86kB",
+        "PIDs": "13"
+      }
+    ]
+  },
+  {
+    "time": "2026-11-15T06:41:23.800Z",
+    "elapsedSeconds": 15.051,
+    "hostFreeBytes": 709763072,
+    "hostTotalBytes": 8299257856,
+    "containers": [
+      {
+        "BlockIO": "0B / 0B",
+        "CPUPerc": "4.12%",
+        "Container": "reservaflow-api",
+        "ID": "184b1df4a83f",
+        "MemPerc": "6.24%",
+        "MemUsage": "15.97MiB / 256MiB",
+        "Name": "reservaflow-api",
+        "NetIO": "3.22MB / 4.43MB",
+        "PIDs": "11"
+      },
+      {
+        "BlockIO": "0B / 0B",
+        "CPUPerc": "25.95%",
+        "Container": "reservaflow-db",
+        "ID": "772b8219e722",
+        "MemPerc": "23.81%",
+        "MemUsage": "121.9MiB / 512MiB",
+        "Name": "reservaflow-db",
+        "NetIO": "16.6MB / 43.5MB",
+        "PIDs": "7"
+      },
+      {
+        "BlockIO": "0B / 0B",
+        "CPUPerc": "1.83%",
+        "Container": "reservaflow-k6-eval",
+        "ID": "0585d09d593e",
+        "MemPerc": "5.55%",
+        "MemUsage": "14.2MiB / 256MiB",
+        "Name": "reservaflow-k6-eval",
+        "NetIO": "121kB / 9.04kB",
+        "PIDs": "13"
+      }
+    ]
+  },
+  {
+    "time": "2026-11-15T06:41:28.816Z",
+    "elapsedSeconds": 20.067,
+    "hostFreeBytes": 690827264,
+    "hostTotalBytes": 8299257856,
+    "containers": [
+      {
+        "BlockIO": "0B / 0B",
+        "CPUPerc": "1.09%",
+        "Container": "reservaflow-api",
+        "ID": "184b1df4a83f",
+        "MemPerc": "6.14%",
+        "MemUsage": "15.71MiB / 256MiB",
+        "Name": "reservaflow-api",
+        "NetIO": "3.27MB / 4.5MB",
+        "PIDs": "11"
+      },
+      {
+        "BlockIO": "0B / 0B",
+        "CPUPerc": "22.72%",
+        "Container": "reservaflow-db",
+        "ID": "772b8219e722",
+        "MemPerc": "23.77%",
+        "MemUsage": "121.7MiB / 512MiB",
+        "Name": "reservaflow-db",
+        "NetIO": "16.6MB / 43.6MB",
+        "PIDs": "7"
+      },
+      {
+        "BlockIO": "0B / 0B",
+        "CPUPerc": "1.66%",
+        "Container": "reservaflow-k6-eval",
+        "ID": "0585d09d593e",
+        "MemPerc": "5.53%",
+        "MemUsage": "14.17MiB / 256MiB",
+        "Name": "reservaflow-k6-eval",
+        "NetIO": "161kB / 11.8kB",
+        "PIDs": "13"
+      }
+    ]
+  },
+  {
+    "time": "2026-11-15T06:41:33.815Z",
+    "elapsedSeconds": 25.066,
+    "hostFreeBytes": 665276416,
+    "hostTotalBytes": 8299257856,
+    "containers": [
+      {
+        "BlockIO": "0B / 0B",
+        "CPUPerc": "5.84%",
+        "Container": "reservaflow-api",
+        "ID": "184b1df4a83f",
+        "MemPerc": "6.52%",
+        "MemUsage": "16.7MiB / 256MiB",
+        "Name": "reservaflow-api",
+        "NetIO": "3.3MB / 4.55MB",
+        "PIDs": "11"
+      },
+      {
+        "BlockIO": "0B / 0B",
+        "CPUPerc": "22.82%",
+        "Container": "reservaflow-db",
+        "ID": "772b8219e722",
+        "MemPerc": "23.81%",
+        "MemUsage": "121.9MiB / 512MiB",
+        "Name": "reservaflow-db",
+        "NetIO": "16.6MB / 43.6MB",
+        "PIDs": "7"
+      },
+      {
+        "BlockIO": "0B / 0B",
+        "CPUPerc": "1.57%",
+        "Container": "reservaflow-k6-eval",
+        "ID": "0585d09d593e",
+        "MemPerc": "6.48%",
+        "MemUsage": "16.6MiB / 256MiB",
+        "Name": "reservaflow-k6-eval",
+        "NetIO": "190kB / 14.6kB",
+        "PIDs": "13"
+      }
+    ]
+  },
+  {
+    "time": "2026-11-15T06:41:38.827Z",
+    "elapsedSeconds": 30.078,
+    "hostFreeBytes": 824360960,
+    "hostTotalBytes": 8299257856,
+    "containers": [],
+    "error": "Command failed: C:/Program Files/Docker/Docker/resources/bin/docker.exe stats --no-stream --format {{json .}} reservaflow-api reservaflow-db reservaflow-k6-eval\nEOF\n"
+  }
+]

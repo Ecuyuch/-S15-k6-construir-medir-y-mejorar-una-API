@@ -1,0 +1,5 @@
+{
+  "sha256": "0614321fe2c98231828f442cc3c70c0c8d927b38acc5de2ca7e165f615aa5a0e",
+  "distribution": "cancelled|58091\nconfirmed|202731\npending|29060\n",
+  "indexes": "idx_reservations_date\nidx_reservations_lookup\nidx_reservations_status_date\nreservations_pkey\n"
+}

@@ -1,0 +1,15 @@
+{
+  "name": "v1-load-1",
+  "script": "load.js",
+  "started": "2026-11-15T06:21:07.387Z",
+  "ended": "2026-11-15T06:21:40.528Z",
+  "seconds": 33.141,
+  "exitCode": 99,
+  "stopReasons": [],
+  "cancelled": false,
+  "integrity": {
+    "overbooked": 0,
+    "resources": 50,
+    "reservations": 290034
+  }
+}

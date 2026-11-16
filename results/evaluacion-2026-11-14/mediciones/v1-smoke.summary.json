@@ -1,0 +1,201 @@
+{
+    "metrics": {
+        "http_req_duration": {
+            "avg": 14.413801422413796,
+            "min": 0.582004,
+            "med": 2.3622864999999997,
+            "max": 64.697896,
+            "p(90)": 42.633694500000004,
+            "p(95)": 47.631147,
+            "p(99)": 60.137978549999964,
+            "thresholds": {
+                "p(95)<2000": false
+            }
+        },
+        "data_received": {
+            "count": 142988,
+            "rate": 4651.7107153015795
+        },
+        "data_sent": {
+            "count": 17734,
+            "rate": 576.9256009256596
+        },
+        "http_req_sending": {
+            "p(99)": 0.09670129999999999,
+            "avg": 0.03705452586206895,
+            "min": 0.013445,
+            "med": 0.0321125,
+            "max": 0.113846,
+            "p(90)": 0.067313,
+            "p(95)": 0.0754445
+        },
+        "checks": {
+            "passes": 145,
+            "fails": 0,
+            "thresholds": {
+                "rate==1": false
+            },
+            "value": 1
+        },
+        "http_req_waiting": {
+            "max": 64.481991,
+            "p(90)": 42.450763,
+            "p(95)": 47.47561675,
+            "p(99)": 59.99147074999997,
+            "avg": 14.265034879310337,
+            "min": 0.507059,
+            "med": 2.111045
+        },
+        "http_req_receiving": {
+            "max": 0.23665,
+            "p(90)": 0.1807995,
+            "p(95)": 0.19943175,
+            "p(99)": 0.23559044999999998,
+            "avg": 0.11171201724137923,
+            "min": 0.032467,
+            "med": 0.1067755
+        },
+        "http_reqs": {
+            "count": 116,
+            "rate": 3.773732361981308
+        },
+        "http_req_blocked": {
+            "med": 0.005826,
+            "max": 1.60047,
+            "p(90)": 0.011141999999999999,
+            "p(95)": 0.01573725,
+            "p(99)": 0.05631884999999981,
+            "avg": 0.021075301724137924,
+            "min": 0.002666
+        },
+        "vus_max": {
+            "value": 1,
+            "min": 1,
+            "max": 1
+        },
+        "http_req_failed": {
+            "passes": 0,
+            "fails": 116,
+            "thresholds": {
+                "rate==0": false
+            },
+            "value": 0
+        },
+        "vus": {
+            "value": 1,
+            "min": 1,
+            "max": 1
+        },
+        "iterations": {
+            "count": 29,
+            "rate": 0.943433090495327
+        },
+        "http_req_connecting": {
+            "min": 0,
+            "med": 0,
+            "max": 0.364331,
+            "p(90)": 0,
+            "p(95)": 0,
+            "p(99)": 0,
+            "avg": 0.003140784482758621
+        },
+        "iteration_duration": {
+            "min": 1040.009789,
+            "med": 1053.679648,
+            "max": 1121.649294,
+            "p(90)": 1077.7508308000001,
+            "p(95)": 1091.435502,
+            "p(99)": 1115.10674904,
+            "avg": 1060.4351041034483
+        },
+        "http_req_duration{expected_response:true}": {
+            "max": 64.697896,
+            "p(90)": 42.633694500000004,
+            "p(95)": 47.631147,
+            "p(99)": 60.137978549999964,
+            "avg": 14.413801422413796,
+            "min": 0.582004,
+            "med": 2.3622864999999997
+        },
+        "http_req_tls_handshaking": {
+            "p(99)": 0,
+            "avg": 0,
+            "min": 0,
+            "med": 0,
+            "max": 0,
+            "p(90)": 0,
+            "p(95)": 0
+        }
+    },
+    "root_group": {
+        "name": "",
+        "path": "",
+        "id": "d41d8cd98f00b204e9800998ecf8427e",
+        "groups": {},
+        "checks": {
+                "health valido": {
+                    "name": "health valido",
+                    "path": "::health valido",
+                    "id": "e2dfd016166fc89ab0c1d0b325e0c1c3",
+                    "passes": 29,
+                    "fails": 0
+                },
+                "availability HTTP 200": {
+                    "id": "93de1a8eee660f0f55c8466c4bc81cff",
+                    "passes": 12,
+                    "fails": 0,
+                    "name": "availability HTTP 200",
+                    "path": "::availability HTTP 200"
+                },
+                "12 franjas y capacidad coherente": {
+                    "name": "12 franjas y capacidad coherente",
+                    "path": "::12 franjas y capacidad coherente",
+                    "id": "b3613644b118a13cbb71406853352632",
+                    "passes": 12,
+                    "fails": 0
+                },
+                "sobrecupo 409": {
+                    "id": "c049fd71f1d21c8f691dc5b1baa4ee51",
+                    "passes": 29,
+                    "fails": 0,
+                    "name": "sobrecupo 409",
+                    "path": "::sobrecupo 409"
+                },
+                "invalido 400": {
+                    "passes": 29,
+                    "fails": 0,
+                    "name": "invalido 400",
+                    "path": "::invalido 400",
+                    "id": "3d03807a9b9f208bde6679a38983bc3f"
+                },
+                "list HTTP 200": {
+                    "passes": 9,
+                    "fails": 0,
+                    "name": "list HTTP 200",
+                    "path": "::list HTTP 200",
+                    "id": "7e4b40a3ed18dd4585c58768f20f64e0"
+                },
+                "pagina de 50 reservas confirmadas": {
+                    "passes": 9,
+                    "fails": 0,
+                    "name": "pagina de 50 reservas confirmadas",
+                    "path": "::pagina de 50 reservas confirmadas",
+                    "id": "d8b09c1449c3ca17ed10caaacd4b6803"
+                },
+                "create HTTP 201": {
+                    "path": "::create HTTP 201",
+                    "id": "4a07a9b404a08a3743a8694311f19eea",
+                    "passes": 8,
+                    "fails": 0,
+                    "name": "create HTTP 201"
+                },
+                "reserva conserva campos": {
+                    "id": "1b398692babed5113e81162bddae9060",
+                    "passes": 8,
+                    "fails": 0,
+                    "name": "reserva conserva campos",
+                    "path": "::reserva conserva campos"
+                }
+            }
+    }
+}

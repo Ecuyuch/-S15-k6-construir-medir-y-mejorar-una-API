@@ -1,0 +1,16 @@
+{
+  "name": "v1-load-1",
+  "script": "load.js",
+  "started": "2026-11-15T05:51:47.767Z",
+  "ended": "2026-11-15T05:52:10.803Z",
+  "seconds": 23.036,
+  "exitCode": 105,
+  "stopReasons": [
+    "RAM fuera del límite seguro durante tres muestras"
+  ],
+  "integrity": {
+    "overbooked": 0,
+    "resources": 50,
+    "reservations": 289993
+  }
+}

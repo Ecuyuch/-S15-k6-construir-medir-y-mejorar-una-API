@@ -1,0 +1,19 @@
+﻿{
+    "authorized":  true,
+    "stoppedAt":  "2026-11-15T06:10:17.4858504Z",
+    "services":  [
+                     {
+                         "name":  "OracleServiceXE",
+                         "originalStatus":  "Running"
+                     },
+                     {
+                         "name":  "MSSQLSERVER",
+                         "originalStatus":  "Running"
+                     },
+                     {
+                         "name":  "MSSQL$SQLEXPRESS",
+                         "originalStatus":  "Running"
+                     }
+                 ],
+    "restoredAt":  "2026-11-16T04:09:11.9437224Z"
+}

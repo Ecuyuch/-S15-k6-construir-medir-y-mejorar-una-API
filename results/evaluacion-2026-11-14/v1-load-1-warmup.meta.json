@@ -1,0 +1,14 @@
+{
+  "name": "v1-load-1-warmup",
+  "script": "warmup.js",
+  "started": "2026-11-15T05:51:23.634Z",
+  "ended": "2026-11-15T05:51:41.005Z",
+  "seconds": 17.371,
+  "exitCode": 0,
+  "stopReasons": [],
+  "integrity": {
+    "overbooked": 0,
+    "resources": 50,
+    "reservations": 289889
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "recordedAt": "2026-11-15T06:47:07.8213545Z",
+  "api": {
+    "node": "v20.20.2",
+    "express": "4.22.3",
+    "pg": "8.23.1"
+  },
+  "postgres": "psql (PostgreSQL) 16.16",
+  "nodeController": "v22.23.2"
+}

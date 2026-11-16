@@ -1,0 +1,19 @@
+Limit  (cost=12079.76..12085.51 rows=50 width=49) (actual time=23.809..26.359 rows=50 loops=1)
+  Buffers: shared hit=3033
+  ->  Gather Merge  (cost=12028.01..25661.95 rows=118556 width=49) (actual time=23.735..26.345 rows=500 loops=1)
+        Workers Planned: 1
+        Workers Launched: 1
+        Buffers: shared hit=3033
+        ->  Sort  (cost=11028.00..11324.39 rows=118556 width=49) (actual time=21.837..21.851 rows=418 loops=2)
+              Sort Key: reservation_date DESC, id DESC
+              Sort Method: top-N heapsort  Memory: 157kB
+              Buffers: shared hit=3033
+              Worker 0:  Sort Method: top-N heapsort  Memory: 157kB
+              ->  Parallel Seq Scan on reservations  (cost=0.00..5120.49 rows=118556 width=49) (actual time=0.010..14.801 rows=101366 loops=2)
+                    Filter: (status = 'confirmed'::text)
+                    Rows Removed by Filter: 43576
+                    Buffers: shared hit=2989
+Planning:
+  Buffers: shared hit=102
+Planning Time: 0.532 ms
+Execution Time: 26.478 ms

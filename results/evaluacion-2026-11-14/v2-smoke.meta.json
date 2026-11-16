@@ -1,0 +1,16 @@
+{
+  "name": "v2-smoke",
+  "script": "smoke.js",
+  "started": "2026-11-15T05:53:06.006Z",
+  "ended": "2026-11-15T05:53:32.396Z",
+  "seconds": 26.39,
+  "exitCode": 105,
+  "stopReasons": [
+    "RAM fuera del límite seguro durante tres muestras"
+  ],
+  "integrity": {
+    "overbooked": 0,
+    "resources": 50,
+    "reservations": 289885
+  }
+}

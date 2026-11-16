@@ -1,0 +1,65 @@
+
+
+  █ THRESHOLDS 
+
+    checks
+    ✓ 'rate==1' rate=100.00%
+
+    http_req_duration
+    ✓ 'p(99)<5000' p(99)=30.34ms
+
+      {phase:base}
+      ✓ 'p(95)<300' p(95)=13.86ms
+
+      {phase:meseta}
+      ✓ 'p(95)<5000' p(95)=22.47ms
+
+      {phase:recuperacion}
+      ✓ 'p(95)<300' p(95)=12.3ms
+
+    http_req_failed
+    ✓ 'rate<0.10' rate=0.00%
+
+      {phase:recuperacion}
+      ✓ 'rate<0.01' rate=0.00%
+
+    http_reqs{phase:recuperacion}
+    ✓ 'count>20' count=385
+
+
+  █ TOTAL RESULTS 
+
+    checks_total.......................: 17394   96.532561/s
+    checks_succeeded...................: 100.00% 17394 out of 17394
+    checks_failed......................: 0.00%   0 out of 17394
+
+    ✓ availability HTTP 200
+    ✓ 12 franjas y capacidad coherente
+    ✓ list HTTP 200
+    ✓ pagina de 50 reservas confirmadas
+    ✓ create HTTP 201
+    ✓ reserva conserva campos
+
+    HTTP
+    http_req_duration.......................................................: avg=8.89ms  min=1.01ms   med=7.34ms   max=152.46ms p(90)=14.7ms   p(95)=18.1ms   p(99)=30.34ms 
+      { expected_response:true }............................................: avg=8.89ms  min=1.01ms   med=7.34ms   max=152.46ms p(90)=14.7ms   p(95)=18.1ms   p(99)=30.34ms 
+      { phase:base }........................................................: avg=8.58ms  min=3.3ms    med=6.84ms   max=69.65ms  p(90)=12.72ms  p(95)=13.86ms  p(99)=40.92ms 
+      { phase:meseta }......................................................: avg=10.96ms min=1.01ms   med=9.68ms   max=83.84ms  p(90)=17.95ms  p(95)=22.47ms  p(99)=36.46ms 
+      { phase:recuperacion }................................................: avg=7.46ms  min=2.65ms   med=6.63ms   max=16.81ms  p(90)=11.52ms  p(95)=12.3ms   p(99)=14.51ms 
+    http_req_failed.........................................................: 0.00%  0 out of 8697
+      { phase:recuperacion }................................................: 0.00%  0 out of 385
+    http_reqs...............................................................: 8697   48.266281/s
+      { phase:recuperacion }................................................: 385    2.136658/s
+
+    EXECUTION
+    iteration_duration......................................................: avg=260.3ms min=251.44ms med=259.02ms max=404.47ms p(90)=266.05ms p(95)=269.51ms p(99)=281.32ms
+    iterations..............................................................: 8697   48.266281/s
+    vus.....................................................................: 1      min=1         max=40
+    vus_max.................................................................: 40     min=40        max=40
+
+    NETWORK
+    data_received...........................................................: 34 MB  188 kB/s
+    data_sent...............................................................: 1.4 MB 7.9 kB/s
+
+
+

@@ -25,15 +25,15 @@ Especificación: lineamientos proporcionados por el estudiante en esta conversac
 
 ## Tareas
 
-- [ ] Probar distribución defectuosa; siembra determinista y respaldo de DB original.
-- [ ] Fortalecer k6, regresión concurrente y automatización con límites y registro.
-- [ ] Congelar plan y código antes de medir, ejecutar v1/v2 y dos cargas cada una.
-- [ ] Analizar resultados, variación, recursos y recuperación sin inventar cifras.
-- [ ] Actualizar README/plan/informe; preparar guion de video y Word/PDF verificados.
+- [x] Probar distribución defectuosa; siembra determinista y respaldo de DB original.
+- [x] Fortalecer k6, regresión concurrente y automatización con límites y registro.
+- [x] Congelar plan y código antes de medir, ejecutar v1/v2 y dos cargas cada una.
+- [x] Analizar resultados, variación, recursos y recuperación sin inventar cifras.
+- [x] Actualizar README/plan/informe; preparar guion de video y Word y guion verificados (sin PDF por solicitud del estudiante).
 
 ## Revisión
 
 Verificar páginas no vacías, fechas fijas, conflictos esperados, sobreventa concurrente,
 parada temprana, igualdad de estado inicial y ausencia de secretos en resultados.
-Pendiente externo: enlace del video y publicar los cambios y evidencias para revisión.
+Pendiente externo: grabar el video y agregar su enlace accesible al Word.
 

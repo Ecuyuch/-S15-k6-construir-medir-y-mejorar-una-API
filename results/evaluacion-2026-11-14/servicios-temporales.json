@@ -1,0 +1,12 @@
+{
+  "authorized": true,
+  "stoppedAt": "2026-11-15T05:58:20.3568516Z",
+  "containers": [
+    "presencia-biometric-attendance-web-1",
+    "presencia-biometric-attendance-api-1",
+    "presencia-biometric-attendance-biometric-1",
+    "presencia-biometric-attendance-sqlserver-1"
+  ],
+  "restoreCommand": "docker start presencia-biometric-attendance-web-1 presencia-biometric-attendance-api-1 presencia-biometric-attendance-biometric-1 presencia-biometric-attendance-sqlserver-1",
+  "restoredAt": "2026-11-16T04:09:42.8823514Z"
+}

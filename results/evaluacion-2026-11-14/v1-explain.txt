@@ -1,0 +1,27 @@
+Limit  (cost=12461.72..12467.47 rows=50 width=39) (actual time=107.512..110.504 rows=50 loops=1)
+  Buffers: shared hit=3082
+  ->  Gather Merge  (cost=12409.97..26136.14 rows=119358 width=39) (actual time=107.439..110.487 rows=500 loops=1)
+        Workers Planned: 1
+        Workers Launched: 1
+        Buffers: shared hit=3082
+        ->  Sort  (cost=11409.96..11708.36 rows=119358 width=39) (actual time=105.055..105.072 rows=442 loops=2)
+              Sort Key: r.reservation_date DESC, r.id DESC
+              Sort Method: top-N heapsort  Memory: 95kB
+              Buffers: shared hit=3082
+              Worker 0:  Sort Method: top-N heapsort  Memory: 87kB
+              ->  Hash Join  (cost=2.12..5462.48 rows=119358 width=39) (actual time=0.139..80.829 rows=101366 loops=2)
+                    Hash Cond: (r.resource_id = rs.id)
+                    Buffers: shared hit=3038
+                    ->  Parallel Seq Scan on reservations r  (cost=0.00..5120.49 rows=119358 width=28) (actual time=0.007..62.449 rows=101366 loops=2)
+                          Filter: (status = 'confirmed'::text)
+                          Rows Removed by Filter: 43576
+                          Buffers: shared hit=2989
+                    ->  Hash  (cost=1.50..1.50 rows=50 width=15) (actual time=0.024..0.025 rows=50 loops=2)
+                          Buckets: 1024  Batches: 1  Memory Usage: 11kB
+                          Buffers: shared hit=2
+                          ->  Seq Scan on resources rs  (cost=0.00..1.50 rows=50 width=15) (actual time=0.006..0.010 rows=50 loops=2)
+                                Buffers: shared hit=2
+Planning:
+  Buffers: shared hit=219
+Planning Time: 1.086 ms
+Execution Time: 110.674 ms

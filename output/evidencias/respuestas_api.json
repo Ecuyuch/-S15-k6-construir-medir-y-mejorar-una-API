@@ -1,0 +1,39 @@
+{
+  "browser": "157.0.4341.46",
+  "evidence": [
+    {
+      "name": "salud",
+      "url": "http://127.0.0.1:3001/health",
+      "status": 200,
+      "body": {
+        "status": "ok",
+        "version": "v2"
+      },
+      "time": "2026-11-15T06:48:06.293Z"
+    },
+    {
+      "name": "reservas",
+      "url": "http://127.0.0.1:3001/reservations?page=1&pageSize=1",
+      "status": 200,
+      "body": {
+        "data": [
+          {
+            "id": "289882",
+            "resource_id": 50,
+            "resource_name": "Recurso 50",
+            "customer_name": "Cliente 1135",
+            "reservation_date": "2027-02-12T00:00:00.000Z",
+            "slot": 20,
+            "guests": 4,
+            "status": "cancelled",
+            "created_at": "2026-09-28T11:21:05.000Z"
+          }
+        ],
+        "page": 1,
+        "pageSize": 1,
+        "hasNext": true
+      },
+      "time": "2026-11-15T06:48:06.584Z"
+    }
+  ]
+}

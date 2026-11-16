@@ -26,11 +26,21 @@ Se corrige la reproducibilidad de datos para ambas versiones por igual.
 La comparación de rendimiento verifica la corrección v2 ya disponible; no se
 presenta como una optimización escrita por primera vez en esta sesión.
 
-## Pendientes de entrega que no se pueden sustituir por mediciones
+## Estado final de la evaluación
 
-1. Grabar video de máximo 3 minutos y agregar enlace público o compartido al Word.
-2. Publicar rama y resultados en un repositorio accesible del estudiante o un fork.
-   El repositorio de origen es público, pero la conexión actual tiene permiso de
-   lectura y carece de permiso de escritura. Los commits locales no están publicados.
-3. Verificar acceso al repositorio y video desde una sesión sin autenticación.
-4. Exportar el Word actualizado a PDF y entregar ese PDF.
+Se completaron humo, dos cargas por versión, estrés con recuperación, regresión
+funcional, análisis de recursos y comparación con condiciones equivalentes.
+V1 se interrumpió por seguridad y se verificó su recuperación con una prueba segura.
+V2 aprobó las cargas y completó el máximo seguro de 40 VUs sin alcanzar saturación.
+Los resultados originales están en results/evaluacion-2026-11-14/mediciones/.
+El informe editable y el guion del video están en output/.
+
+Repositorio de entrega:
+https://github.com/Ecuyuch/-S15-k6-construir-medir-y-mejorar-una-API
+
+## Pendiente del estudiante
+
+Grabar un video de máximo tres minutos, verificar que el docente pueda acceder
+al enlace y pegarlo en el informe Word. El guion contiene narración, tiempos y
+archivos para mostrar. La consigna original pide PDF; por solicitud expresa del
+estudiante, esta entrega contiene Word y no incluye PDF.

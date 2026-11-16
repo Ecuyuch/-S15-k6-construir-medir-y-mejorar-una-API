@@ -47,7 +47,7 @@ def analyze(name):
     failed=[k+': '+expr for k,v in m.items() for expr,bad in v.get('thresholds',{}).items() if bad]
     return dict(name=name,meta=meta,latency=m.get('http_req_duration',{}),error_rate=m.get('http_req_failed',{}).get('value'),
                 check_rate=m.get('checks',{}).get('value'),requests=m.get('http_reqs',{}),iterations=m.get('iterations',{}),
-                dropped=m.get('dropped_iterations',{}).get('count',0),vus=m.get('vus',{}),
+                dropped=m.get('dropped_iterations',{}).get('count'),vus=m.get('vus',{}),
                 endpoints={k:{'count':counts[k],'p95':pct(v,95),'p99':pct(v,99),'avg':statistics.mean(v)} for k,v in durations.items()},
                 phase_counts=dict(phases),status_codes=dict(response_codes),failed_thresholds=failed,
                 recovery={k:v for k,v in m.items() if 'phase:recuperacion' in k or 'phase:base' in k or 'phase:meseta' in k},
@@ -77,7 +77,7 @@ def main():
         rows.append('| '+name+' | '+ ' | '.join([
             f"{r['meta']['seconds']:.1f}",str(r['requests'].get('count',0)),f"{r['requests'].get('rate',0):.2f}",
             f"{r['latency'].get('p(95)',0):.2f}",f"{r['latency'].get('p(99)',0):.2f}",
-            f"{100*(r['error_rate'] or 0):.2f}",f"{100*(r['check_rate'] or 0):.2f}",str(r['dropped']),str(r['meta']['exitCode'])])+' |')
+            f"{100*(r['error_rate'] or 0):.2f}",f"{100*(r['check_rate'] or 0):.2f}",'No aplica' if r['dropped'] is None else str(r['dropped']),str(r['meta']['exitCode'])])+' |')
     rows.extend(['','Los tiempos incluyen arranque/cierre del contenedor en meta; req/s usa duración interna de k6.',
                  'Las interrupciones conservan el resultado parcial y no equivalen a completar el escenario.',
                  'http_req_duration mide solicitudes completadas, incluidas las fallidas; no incluye solicitudes descartadas.',

@@ -1,0 +1,9 @@
+{
+  "version": "v2",
+  "integrity": {
+    "overbooked": 0,
+    "resources": 50,
+    "reservations": 289882
+  },
+  "containers": "NAME              IMAGE                    COMMAND                  SERVICE   CREATED          STATUS                    PORTS\nreservaflow-api   reservaflowbackend-api   \"docker-entrypoint.s…\"   api       50 seconds ago   Up 48 seconds             127.0.0.1:3001->3000/tcp\nreservaflow-db    postgres:16-alpine       \"docker-entrypoint.s…\"   db        57 minutes ago   Up 47 minutes (healthy)   127.0.0.1:5433->5432/tcp\n"
+}

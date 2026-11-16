@@ -1,0 +1,12 @@
+{
+  "initial": {
+    "sha256": "0614321fe2c98231828f442cc3c70c0c8d927b38acc5de2ca7e165f615aa5a0e",
+    "distribution": "cancelled|58091\nconfirmed|202731\npending|29060\n",
+    "indexes": "reservations_pkey\n"
+  },
+  "integrity": {
+    "overbooked": 0,
+    "resources": 50,
+    "reservations": 289882
+  }
+}

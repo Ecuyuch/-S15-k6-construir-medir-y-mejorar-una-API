@@ -1,0 +1,129 @@
+[
+  {
+    "time": "2026-11-15T05:53:13.363Z",
+    "elapsedSeconds": 7.357,
+    "hostFreeBytes": 658321408,
+    "hostTotalBytes": 8299257856,
+    "containers": [
+      {
+        "BlockIO": "0B / 0B",
+        "CPUPerc": "1.34%",
+        "Container": "reservaflow-api",
+        "ID": "117201ed72b9",
+        "MemPerc": "6.82%",
+        "MemUsage": "17.46MiB / 256MiB",
+        "Name": "reservaflow-api",
+        "NetIO": "63.4kB / 79kB",
+        "PIDs": "11"
+      },
+      {
+        "BlockIO": "0B / 0B",
+        "CPUPerc": "6.25%",
+        "Container": "reservaflow-db",
+        "ID": "772b8219e722",
+        "MemPerc": "18.56%",
+        "MemUsage": "95.04MiB / 512MiB",
+        "Name": "reservaflow-db",
+        "NetIO": "1.37MB / 2MB",
+        "PIDs": "7"
+      },
+      {
+        "BlockIO": "0B / 0B",
+        "CPUPerc": "1.68%",
+        "Container": "reservaflow-k6-eval",
+        "ID": "186b59506064",
+        "MemPerc": "4.68%",
+        "MemUsage": "11.99MiB / 256MiB",
+        "Name": "reservaflow-k6-eval",
+        "NetIO": "7.51kB / 3.26kB",
+        "PIDs": "13"
+      }
+    ]
+  },
+  {
+    "time": "2026-11-15T05:53:18.295Z",
+    "elapsedSeconds": 12.289,
+    "hostFreeBytes": 385982464,
+    "hostTotalBytes": 8299257856,
+    "containers": [
+      {
+        "BlockIO": "0B / 0B",
+        "CPUPerc": "1.31%",
+        "Container": "reservaflow-api",
+        "ID": "117201ed72b9",
+        "MemPerc": "6.95%",
+        "MemUsage": "17.8MiB / 256MiB",
+        "Name": "reservaflow-api",
+        "NetIO": "93.5kB / 131kB",
+        "PIDs": "11"
+      },
+      {
+        "BlockIO": "0B / 0B",
+        "CPUPerc": "3.79%",
+        "Container": "reservaflow-db",
+        "ID": "772b8219e722",
+        "MemPerc": "18.60%",
+        "MemUsage": "95.23MiB / 512MiB",
+        "Name": "reservaflow-db",
+        "NetIO": "1.38MB / 2.02MB",
+        "PIDs": "7"
+      },
+      {
+        "BlockIO": "0B / 0B",
+        "CPUPerc": "1.20%",
+        "Container": "reservaflow-k6-eval",
+        "ID": "186b59506064",
+        "MemPerc": "4.65%",
+        "MemUsage": "11.89MiB / 256MiB",
+        "Name": "reservaflow-k6-eval",
+        "NetIO": "47.7kB / 7.42kB",
+        "PIDs": "13"
+      }
+    ]
+  },
+  {
+    "time": "2026-11-15T05:53:23.914Z",
+    "elapsedSeconds": 17.908,
+    "hostFreeBytes": 245329920,
+    "hostTotalBytes": 8299257856,
+    "containers": [
+      {
+        "BlockIO": "0B / 0B",
+        "CPUPerc": "1.15%",
+        "Container": "reservaflow-api",
+        "ID": "117201ed72b9",
+        "MemPerc": "7.07%",
+        "MemUsage": "18.11MiB / 256MiB",
+        "Name": "reservaflow-api",
+        "NetIO": "104kB / 148kB",
+        "PIDs": "11"
+      },
+      {
+        "BlockIO": "0B / 0B",
+        "CPUPerc": "66.36%",
+        "Container": "reservaflow-db",
+        "ID": "772b8219e722",
+        "MemPerc": "18.62%",
+        "MemUsage": "95.34MiB / 512MiB",
+        "Name": "reservaflow-db",
+        "NetIO": "1.38MB / 2.03MB",
+        "PIDs": "7"
+      },
+      {
+        "BlockIO": "0B / 0B",
+        "CPUPerc": "1.67%",
+        "Container": "reservaflow-k6-eval",
+        "ID": "186b59506064",
+        "MemPerc": "4.99%",
+        "MemUsage": "12.77MiB / 256MiB",
+        "Name": "reservaflow-k6-eval",
+        "NetIO": "56.8kB / 12.6kB",
+        "PIDs": "13"
+      }
+    ]
+  },
+  {
+    "time": "2026-11-15T05:53:32.383Z",
+    "error": "Command failed: C:/Program Files/Docker/Docker/resources/bin/docker.exe stats --no-stream --format {{json .}} reservaflow-api reservaflow-db reservaflow-k6-eval\nError response from daemon: No such container: reservaflow-k6-eval\n"
+  }
+]

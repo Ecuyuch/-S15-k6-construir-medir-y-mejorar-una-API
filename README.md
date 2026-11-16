@@ -107,7 +107,7 @@ una prueba interrumpida con 120 o 180 segundos completados.
   gzip originales, consola, recursos, integridad, planes SQL, manifiesto y entorno.
 - `scripts/analyze.py`: deriva análisis de las series originales y resúmenes.
 - `docs/VERIFICACION_RUBRICA.md`: revisión de faltantes y pendientes externos.
-- `output/`: informe editable, PDF, guion y material preparado para entregar.
+- `output/`: informe editable en Word, guion del video en Word/Markdown y evidencias. Por solicitud del estudiante no se incluye PDF.
 
 `dropped_iterations` mide iteraciones no iniciadas por k6. Evaluar configuración,
 VUs y recursos del generador junto a latencia y recursos del servidor; no atribuir

@@ -16,6 +16,7 @@ OUT=ROOT/'output'; OUT.mkdir(exist_ok=True)
 FIG=OUT/'evidencias'; FIG.mkdir(exist_ok=True)
 A=json.loads((DATA/'analysis.json').read_text(encoding='utf-8'))
 E=json.loads((DATA/'environment.json').read_text(encoding='utf-8'))
+V=json.loads((DATA/'runtime-versions.json').read_text(encoding='utf-8-sig'))
 M=json.loads((DATA/'code-manifest.json').read_text(encoding='utf-8'))
 RUNS=A['runs']
 def r(name):return RUNS[name]
@@ -29,48 +30,46 @@ def png_console(name,filename):
     lines=raw.splitlines()
     selected=[]
     # Conservar métricas y umbrales de la consola, sin modificar números.
-    needles=('p(95)','p(99)','http_req_failed','checks','http_reqs','dropped_iterations','thresholds on metrics',
-             'test run was aborted','Insufficient VUs','insufficient VUs')
-    for line in lines:
-        if any(x in line for x in needles):
-            selected.extend(textwrap.wrap(line.strip(),width=103,replace_whitespace=False) or [''])
-    selected=selected[:18]
-    font=ImageFont.truetype('C:/Windows/Fonts/consola.ttf',20)
-    title=ImageFont.truetype('C:/Windows/Fonts/arialbd.ttf',27)
-    img=Image.new('RGB',(1400,100+30*len(selected)), '#f5f7fa')
+    primary=[line for line in lines if re.search(r'(http_req_duration|http_req_failed|http_reqs|checks_succeeded|checks_failed|dropped_iterations|iterations)\.{2}',line)]
+    notices=[line for line in lines if 'test run was aborted' in line or 'thresholds on metrics' in line or 'Insufficient VUs' in line]
+    for line in primary+notices[-2:]:
+        selected.extend(textwrap.wrap(line.strip(),width=80,replace_whitespace=False) or [''])
+    selected=selected[:16]
+    font=ImageFont.truetype('C:/Windows/Fonts/consola.ttf',22)
+    title=ImageFont.truetype('C:/Windows/Fonts/arialbd.ttf',25)
+    img=Image.new('RGB',(1120,100+31*len(selected)), '#f5f7fa')
     d=ImageDraw.Draw(img); d.text((28,20),name+' | salida original de k6',fill='#142b44',font=title)
-    for i,line in enumerate(selected):d.text((28,78+i*30),line,fill='#171c22',font=font)
+    for i,line in enumerate(selected):d.text((28,78+i*31),line,fill='#171c22',font=font)
     img.save(FIG/filename)
 def chart():
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+    from matplotlib.ticker import ScalarFormatter
     names=['v1-load-1','v1-load-2','v2-load-1','v2-load-2']
-    img=Image.new('RGB',(1400,650),'white');d=ImageDraw.Draw(img)
-    ft=ImageFont.truetype('C:/Windows/Fonts/arial.ttf',25)
-    fb=ImageFont.truetype('C:/Windows/Fonts/arialbd.ttf',30)
-    d.text((50,20),'Latencia p95 en carga de 40 operaciones por segundo',fill='black',font=fb)
-    left,bottom,top=180,540,100
-    values=[max(metric(n,'p(95)'),.1) for n in names]
-    ymax=max(10000,10**math.ceil(math.log10(max(values))))
-    def y(v):return bottom-(math.log10(max(v,.1))+1)/(math.log10(ymax)+1)*(bottom-top)
-    for tick in [.1,1,10,100,1000,10000]:
-        if tick>ymax:continue
-        yy=y(tick);d.line((left,yy,1330,yy),fill='#d8dce2',width=2)
-        d.text((45,yy-14),str(tick)+' ms',fill='#333333',font=ft)
-    yy=y(200);d.line((left,yy,1330,yy),fill='#778899',width=3)
-    d.text((1060,yy-31),'Meta 200 ms',fill='#555555',font=ft)
-    for i,(name,v) in enumerate(zip(names,values)):
-        x=250+i*265; yy=y(v)
-        d.rectangle((x,yy,x+150,bottom),fill='#a63838' if name.startswith('v1') else '#247562')
-        d.text((x-10,yy-35),f(v)+' ms',fill='black',font=ft)
-        d.text((x-6,bottom+15),name,fill='black',font=ft)
-    d.text((50,602),'Escala logarítmica. Una interrupción de v1 no equivale a completar los 120 segundos.',fill='#555555',font=ft)
-    img.save(FIG/'comparacion_p95.png')
+    values=[metric(n,'p(95)') for n in names]
+    fig,ax=plt.subplots(figsize=(10,4.5),dpi=180)
+    bars=ax.bar(names,values,color=['#9f3d3d','#9f3d3d','#247562','#247562'],width=.57,zorder=3)
+    for bar,name,value in zip(bars,names,values):
+        if name.startswith('v1'):bar.set_hatch('//')
+        ax.text(bar.get_x()+bar.get_width()/2,value*1.23,f(value)+' ms',ha='center',fontsize=13)
+    ax.set_yscale('log');ax.set_ylim(.5,18000)
+    ax.set_yticks([1,10,100,1000,10000]);ax.yaxis.set_major_formatter(ScalarFormatter())
+    ax.axhline(200,color='#697585',linestyle='--',linewidth=1.2)
+    ax.text(3.44,240,'Meta 200 ms',ha='right',fontsize=12,color='#414955')
+    ax.set_ylabel('p95 en milisegundos',fontsize=14)
+    ax.set_title('Carga de 40 operaciones por segundo',fontsize=16,pad=15)
+    ax.tick_params(axis='both',labelsize=13)
+    ax.grid(axis='y',alpha=.25,zorder=0)
+    ax.spines[['top','right']].set_visible(False)
+    fig.tight_layout();fig.savefig(FIG/'comparacion_p95.png',bbox_inches='tight');plt.close(fig)
 
 D=Document()
 sec=D.sections[0];sec.top_margin=Inches(.65);sec.bottom_margin=Inches(.65)
 sec.left_margin=Inches(.75);sec.right_margin=Inches(.75)
 sec.page_width=Inches(8.5);sec.page_height=Inches(11)
 normal=D.styles['Normal'];normal.font.name='Calibri';normal.font.size=Pt(10.5)
-normal.paragraph_format.space_after=Pt(6);normal.paragraph_format.line_spacing=1.1
+normal.paragraph_format.space_after=Pt(4);normal.paragraph_format.line_spacing=1.05
 for name,size in [('Title',25),('Subtitle',13),('Heading 1',17),('Heading 2',12)]:
     s=D.styles[name];s.font.name='Calibri';s.font.size=Pt(size);s.font.color.rgb=RGBColor(0,0,0)
     s.paragraph_format.space_after=Pt(9)
@@ -109,9 +108,11 @@ def table(headers,rows,widths=None):
                 z=OxmlElement('w:'+edge);z.set(qn('w:w'),'75');z.set(qn('w:type'),'dxa');margins.append(z)
             tcPr.append(margins)
             for pp in c.paragraphs:
-                pp.paragraph_format.space_after=Pt(3);pp.paragraph_format.space_before=Pt(3);pp.paragraph_format.line_spacing=1.05
+                pp.paragraph_format.space_after=Pt(2);pp.paragraph_format.space_before=Pt(2);pp.paragraph_format.line_spacing=1.05
+                if re.fullmatch(r'[0-9.,%\s-]+(?:ms|MiB|s)?',c.text) or headers[ci] in ['Carné','Estado','Salida','Resultado']:
+                    pp.alignment=WD_ALIGN_PARAGRAPH.CENTER
                 for rr in pp.runs:rr.font.size=Pt(9);rr.font.bold=ri==0;rr.font.color.rgb=RGBColor.from_string('FFFFFF' if ri==0 else '000000')
-    p()
+    gap=p();gap.paragraph_format.line_spacing=Pt(1);gap.paragraph_format.space_after=Pt(4)
 def image(file,caption,width=6.8):
     D.add_picture(str(FIG/file),width=Inches(width));pp=p(caption);pp.paragraph_format.space_after=Pt(9)
     for rr in pp.runs:rr.italic=True;rr.font.size=Pt(9)
@@ -135,9 +136,10 @@ sub('Enlaces de entrega')
 link('Repositorio de origen', 'https://github.com/josuesanchez96/ReservaFlowBackend')
 link('Repositorio con esta evaluación', 'https://github.com/Ecuyuch/-S15-k6-construir-medir-y-mejorar-una-API')
 p('Video de máximo 3 minutos: AGREGAR AQUÍ EL ENLACE ACCESIBLE.')
-p('La entrega se publica en main del repositorio del estudiante, con la aplicación, scripts, datos, resultados originales y documentación. El enlace del video es el único campo de entrega que debe completarse antes de exportar y enviar el PDF definitivo.')
+p('La entrega se publica en main del repositorio del estudiante, con la aplicación, scripts, datos, resultados originales y documentación. El enlace del video es el único campo de entrega que debe completarse en este informe editable.')
 sub('Alcance y autoría')
 p('La implementación de v1, v2 y el parche de índices ya existían en el repositorio de origen. Esta evaluación corrigió la semilla, fortaleció las comprobaciones y obtuvo evidencia local nueva. Los informes históricos se conservan separados y sus cifras no se atribuyen a este equipo.')
+p('Los intentos iniciales se interrumpieron por RAM o telemetría y se conservaron aparte. La campaña principal se ejecutó después de detener siete servicios ajenos con autorización; utiliza la misma instrumentación en ambos grupos.')
 
 page('Aplicación y reproducción')
 p('Node.js 20 con Express y TypeScript permite una API pequeña y tipada. PostgreSQL aporta transacciones, restricciones y bloqueo FOR UPDATE para serializar creaciones sobre un recurso. El pool tiene 10 conexiones. Docker fija versiones y separa la base de datos de otros servicios del equipo.')
@@ -166,12 +168,13 @@ table(['Componente','Registro real'],[
 ['Recursos de WSL',str(docker['NCPU'])+' CPU lógicas; '+f(docker['MemTotal']/1024**3)+' GiB'],
 ['Generador',E['k6']],
 ['Contenedores','API 1 CPU / 256 MiB; DB 1 CPU / 512 MiB; k6 1 CPU / 256 MiB'],
-['Stack','Node 20 Alpine, Express 4, PostgreSQL 16 Alpine; versiones exactas en environment.json'],
+['Stack','Node '+V['api']['node']+'; Express '+V['api']['express']+'; pg '+V['api']['pg']+'; '+V['postgres']],
 ['Código',M['gitCommit'][:12]+'; SHA256 por archivo en code-manifest.json'],
 ['Semilla','50 recursos; 289882 reservas; ancla fija 2026-11-14'],
 ['Estados','202731 confirmed; 58091 cancelled; 29060 pending']],[1.45,5.55])
 p('Los datos se derivan de MD5 de una clave estable por fila y se insertan en orden fijo. Cada horario sembrado tiene como máximo 3 reservas de hasta 4 invitados. No dependen de la fecha de ejecución ni de random sin correlación.')
 p('Antes de cada ensayo se restauraron tablas y secuencias, y se aplicaron índices únicamente a v2. Se comprobó la huella SHA256 de todas las filas restauradas: '+('idéntica en los seis ensayos.' if A['identical_seed'] else 'revisar diferencias en los archivos initial.json.'))
+p('El estado inicial es equivalente. El volumen final difiere por las creaciones aceptadas durante cada ejecución; se registra en meta.json y se restablece antes del siguiente ensayo.')
 p('Orden de cargas ABBA: v1 primera, v2 primera, v2 segunda, v1 segunda. Con autorización se detuvieron cuatro contenedores del otro proyecto y tres servicios nativos de bases de datos. Se registró su estado para restaurarlos al terminar. Los intentos previos se conservaron separados.')
 p('Tras cada restauración se sincronizó y liberó la caché de archivos WSL en ambos grupos; se conservaron los shared_buffers de PostgreSQL. Luego hubo 15 s de calentamiento. Se eliminaron sus escrituras, se restableció la secuencia y se ejecutó ANALYZE. No es una prueba de caché totalmente fría.')
 
@@ -226,10 +229,14 @@ else:
 for label,items in [('v1',v1),('v2',v2)]:
     vals=[x['latency']['p(95)'] for x in items]
     p('Variación de '+label+': p95 entre '+f(min(vals))+' y '+f(max(vals))+' ms; amplitud relativa al menor '+f((max(vals)-min(vals))/min(vals)*100)+'%. Dos repeticiones permiten describir variación, pero no inferir significancia estadística.')
+p('La diferencia absoluta entre las dos repeticiones de v2 es '+f(abs(v2[0]['latency']['p(95)']-v2[1]['latency']['p(95)']))+' ms y no cambió la aprobación de sus umbrales.')
 p('Reducción descriptiva de p95 por repetición: '+', '.join(f((1-b['latency']['p(95)']/a['latency']['p(95)'])*100)+'%' for a,b in zip(v1,v2))+
   '. La corrección se evalúa como conjunto JOIN e índices; este diseño no atribuye un porcentaje individual a cada índice.')
 
 page('Operaciones recursos y lectura crítica')
+table(['Métrica global','v1 primera','v1 segunda','v2 primera','v2 segunda'],[
+ [label]+[f(x['latency'][key])+' ms' for x in loads]
+ for label,key in [('Promedio','avg'),('Mediana','med'),('p90','p(90)')]],[1.3,1.425,1.425,1.425,1.425])
 table(['Operación','v1 primera p95','v1 segunda p95','v2 primera p95','v2 segunda p95'],[
  [ep]+[f(x['endpoints'].get(ep,{}).get('p95'))+' ms' for x in loads] for ep in ['availability','list','create']],[1.3,1.425,1.425,1.425,1.425])
 table(['Ensayo','CPU DB máx','RAM DB máx','CPU k6 máx','RAM libre mín'],[
@@ -238,14 +245,15 @@ table(['Ensayo','CPU DB máx','RAM DB máx','CPU k6 máx','RAM libre mín'],[
  f(x['resources'].get('reservaflow-k6-eval',{}).get('cpu_max'))+'%',
  f(x['host_free_MiB_min'])+' MiB'] for x in loads],[1.3,1.35,1.45,1.35,1.55])
 p('Docker expresa 100% CPU aproximadamente como un núcleo lógico. El límite es 1 CPU por contenedor; las muestras instantáneas pueden exceder ligeramente 100% por el intervalo. RAM proviene de docker stats y no es RSS puro. El muestreo cada 5 s puede omitir picos breves; datos completos de API, DB y generador están en resources.json.')
+p('Generador y servidor comparten el equipo. Permanecen procesos del sistema y otras aplicaciones; no se midieron temperatura ni CPU total del host. No se atribuye toda la variación a PostgreSQL ni se extrapola a producción.')
 p('dropped_iterations son iteraciones que k6 no inició; no son respuestas HTTP 500 ni pérdida de paquetes. Con arrival-rate aparecen cuando no hay VUs libres. Se deben leer junto a duración de iteración, 60 VUs máximas, CPU/RAM del generador, timeouts y recursos DB. El host compartido y la instrumentación también añaden variación.')
 p('Las latencias agregadas solo incluyen peticiones emitidas y finalizadas, incluidas las que fallan; las operaciones descartadas no tienen latencia. La mezcla completada puede diferir del 40/30/30 programado si hay descartes o aborto. Los estados HTTP y conteos por operación se derivan de la serie JSON original.')
 p('El timeout de 6 s censura las esperas mayores: un percentil cercano a 6000 ms no demuestra que el servidor completaría la operación en ese tiempo. req/s cuenta peticiones finalizadas por el generador, incluidas las fallidas; el rendimiento exitoso debe descontarlas.')
+p('El estado 0 de k6 indica que no se recibió respuesta HTTP, y no es un código enviado por la API. Se conserva el error específico en la serie original y la consola. En el modelo cerrado de estrés, dropped_iterations no aplica como indicador de una tasa de llegadas no alcanzada.')
 for x in loads:
     counts={k:v['count'] for k,v in x['endpoints'].items()}
     p(x['name']+': mezcla completada '+', '.join(k+'='+str(v) for k,v in counts.items())+
       '; estados '+str(x['status_codes'])+'.',None)
-p('Los primeros intentos en la carpeta superior se interrumpieron por RAM con otros servicios activos. No se mezclan con esta campaña, realizada con esos cuatro contenedores detenidos. No se atribuye la mejora exclusivamente al servidor a partir de los descartes.')
 
 page('Estrés recuperación e integridad')
 stress=[r('v1-stress'),r('v2-stress')]
@@ -266,8 +274,17 @@ for x in stress:
     p('Motivos/umbrales fallidos: '+('; '.join(x['failed_thresholds']) or 'ninguno')+
       ('. Parada de monitor: '+'; '.join(x['meta']['stopReasons']) if x['meta']['stopReasons'] else '')+'.')
 p('En un modelo cerrado el rendimiento alcanzado depende de la latencia y las pausas; 40 VUs no equivalen a 40 solicitudes/s. Si v2 completa el máximo sin saturarse, solo demuestra margen hasta ese límite seguro, no capacidad máxima ni ausencia de problemas a mayor escala.')
+p('V2 alcanzó un máximo observado de '+str(r('v2-stress')['vus'].get('max'))+' VUs y completó los 180 s programados, con errores '+pct(r('v2-stress')['error_rate'])+
+  '. Su p95 en meseta fue '+f(r('v2-stress')['recovery']['http_req_duration{phase:meseta}']['p(95)'])+
+  ' ms y en recuperación '+f(r('v2-stress')['recovery']['http_req_duration{phase:recuperacion}']['p(95)'])+
+  ' ms. No se alcanzó saturación de v2 dentro del máximo seguro ensayado.')
 sub('Regresión funcional')
 func=json.loads((DATA/'v2-functional-final.json').read_text())
+# Normalizar etiquetas de consola con doble codificación; los originales y
+# los resultados de las aserciones se conservan sin alterar.
+for item in func['results']:
+    if 'Ã' in item['name']:
+        item['name']=item['name'].encode('latin1').decode('utf-8')
 table(['Comprobación','Resultado'],[[x['name'],'Pasa' if x['pass'] else x.get('error','Falla')] for x in func['results']],[5.5,1.5])
 p('La misma regresión se ejecutó en v1 y v2. La prueba concurrente lanza 20 solicitudes de 3 invitados: 6 creaciones y 14 conflictos, total 18 y disponibilidad 2. También verifica 400, 404, páginas no vacías, orden y ausencia de IDs repetidos entre páginas.')
 p('Integridad SQL después de cada ensayo: cero grupos con SUM(guests)>20 para reservas confirmed. Los archivos meta.json conservan los conteos; la validación final restaura datos limpios y deja v2 activa.')
@@ -276,6 +293,12 @@ page('Evidencias originales y límites')
 image('consola_v1.png','Figura 2. Transcripción visual de líneas de la consola original v1-load-1.console.txt. No sustituye el archivo completo.',6.8)
 image('consola_v2.png','Figura 3. Transcripción visual de líneas de la consola original v2-load-1.console.txt. Números sin editar.',6.8)
 p('Estas imágenes se generan de registros originales para facilitar lectura y trazabilidad; no son fotografías de una terminal. Las capturas de la API y el análisis, cuando se incluyen en la carpeta evidencias, se obtienen del servicio local.')
+
+if (FIG/'captura_api_salud.png').exists() and (FIG/'captura_api_reservas.png').exists():
+    page('Capturas de respuestas de la API')
+    image('captura_api_salud.png','Figura 4. Captura del navegador de GET /health en la API local activa v2. Se aumenta la tipografía para lectura.',6.8)
+    image('captura_api_reservas.png','Figura 5. Captura del navegador de una página real de reservas. El JSON se formatea sin cambiar campos ni valores.',6.8)
+    p('Las respuestas HTTP y fecha de captura se conservan en output/evidencias/respuestas_api.json. Los checks de humo y regresión cubren además disponibilidad, creación y casos negativos.')
 
 page('Entrega referencias y video')
 sub('Ubicación de los resultados')
@@ -296,7 +319,7 @@ p('1:05 a 1:55. Abrir las consolas reales v1/v2 y comparar p95, errores y rendim
 p('1:55 a 2:30. Mostrar listV1/listV2 y db/v2_fix.sql. Explicar 51 consultas frente a una e índices; señalar que la corrección ya venía en la base del proyecto.')
 p('2:30 a 2:55. Mostrar recuperación y regresión concurrente. Declarar límites de hardware, máximo 40 VUs y dos repeticiones. Finalizar antes de 3:00.')
 sub('Pasos pendientes de publicación')
-p('Agregar el enlace del video en la primera página, comprobar que cualquier revisor pueda abrirlo y exportar el Word actualizado a PDF. El repositorio público del estudiante contiene los archivos y evidencias de esta evaluación.')
+p('Agregar el enlace del video en la primera página y comprobar que cualquier revisor pueda abrirlo. Se entrega el informe editable en Word, según lo solicitado. El repositorio público del estudiante contiene los archivos y evidencias de esta evaluación.')
 sub('Referencias oficiales')
 link('Umbrales de k6','https://grafana.com/docs/k6/latest/using-k6/thresholds/')
 link('Iteraciones descartadas','https://grafana.com/docs/k6/latest/using-k6/scenarios/concepts/dropped-iterations/')
@@ -308,6 +331,9 @@ for section in D.sections:
     rr=pp.add_run('ReservaFlow  |  ');rr.font.size=Pt(8)
     field=OxmlElement('w:fldSimple');field.set(qn('w:instr'),'PAGE');pp._p.append(field)
 path=OUT/'Informe_ReservaFlow_Eddy_Cuyuch.docx'
+for tree in [D.styles.element,D.element]:
+    for border in list(tree.xpath('.//w:pBdr')):
+        border.getparent().remove(border)
 D.save(path)
 print(path)
 

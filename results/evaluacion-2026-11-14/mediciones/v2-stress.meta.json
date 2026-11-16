@@ -1,0 +1,15 @@
+{
+  "name": "v2-stress",
+  "script": "stress_recovery.js",
+  "started": "2026-11-15T06:42:37.964Z",
+  "ended": "2026-11-15T06:45:39.585Z",
+  "seconds": 181.621,
+  "exitCode": 0,
+  "stopReasons": [],
+  "cancelled": false,
+  "integrity": {
+    "overbooked": 0,
+    "resources": 50,
+    "reservations": 292489
+  }
+}

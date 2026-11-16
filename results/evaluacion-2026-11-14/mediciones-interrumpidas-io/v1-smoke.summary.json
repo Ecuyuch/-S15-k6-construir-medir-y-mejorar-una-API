@@ -1,0 +1,201 @@
+{
+    "root_group": {
+        "id": "d41d8cd98f00b204e9800998ecf8427e",
+        "groups": {},
+        "checks": {
+                "health valido": {
+                    "name": "health valido",
+                    "path": "::health valido",
+                    "id": "e2dfd016166fc89ab0c1d0b325e0c1c3",
+                    "passes": 28,
+                    "fails": 0
+                },
+                "availability HTTP 200": {
+                    "id": "93de1a8eee660f0f55c8466c4bc81cff",
+                    "passes": 12,
+                    "fails": 0,
+                    "name": "availability HTTP 200",
+                    "path": "::availability HTTP 200"
+                },
+                "12 franjas y capacidad coherente": {
+                    "path": "::12 franjas y capacidad coherente",
+                    "id": "b3613644b118a13cbb71406853352632",
+                    "passes": 12,
+                    "fails": 0,
+                    "name": "12 franjas y capacidad coherente"
+                },
+                "sobrecupo 409": {
+                    "name": "sobrecupo 409",
+                    "path": "::sobrecupo 409",
+                    "id": "c049fd71f1d21c8f691dc5b1baa4ee51",
+                    "passes": 28,
+                    "fails": 0
+                },
+                "invalido 400": {
+                    "passes": 28,
+                    "fails": 0,
+                    "name": "invalido 400",
+                    "path": "::invalido 400",
+                    "id": "3d03807a9b9f208bde6679a38983bc3f"
+                },
+                "list HTTP 200": {
+                    "name": "list HTTP 200",
+                    "path": "::list HTTP 200",
+                    "id": "7e4b40a3ed18dd4585c58768f20f64e0",
+                    "passes": 9,
+                    "fails": 0
+                },
+                "pagina de 50 reservas confirmadas": {
+                    "fails": 0,
+                    "name": "pagina de 50 reservas confirmadas",
+                    "path": "::pagina de 50 reservas confirmadas",
+                    "id": "d8b09c1449c3ca17ed10caaacd4b6803",
+                    "passes": 9
+                },
+                "create HTTP 201": {
+                    "id": "4a07a9b404a08a3743a8694311f19eea",
+                    "passes": 7,
+                    "fails": 0,
+                    "name": "create HTTP 201",
+                    "path": "::create HTTP 201"
+                },
+                "reserva conserva campos": {
+                    "path": "::reserva conserva campos",
+                    "id": "1b398692babed5113e81162bddae9060",
+                    "passes": 7,
+                    "fails": 0,
+                    "name": "reserva conserva campos"
+                }
+            },
+        "name": "",
+        "path": ""
+    },
+    "metrics": {
+        "http_req_receiving": {
+            "p(90)": 0.2110215000000001,
+            "p(95)": 0.25976419999999945,
+            "p(99)": 0.37573836,
+            "avg": 0.1464408035714285,
+            "min": 0.061184,
+            "med": 0.131455,
+            "max": 0.815453
+        },
+        "http_req_tls_handshaking": {
+            "max": 0,
+            "p(90)": 0,
+            "p(95)": 0,
+            "p(99)": 0,
+            "avg": 0,
+            "min": 0,
+            "med": 0
+        },
+        "iteration_duration": {
+            "avg": 1084.7364889285716,
+            "min": 1052.720323,
+            "med": 1066.4174965000002,
+            "max": 1190.63522,
+            "p(90)": 1123.270779,
+            "p(95)": 1163.6725457999999,
+            "p(99)": 1187.9333043499998
+        },
+        "data_sent": {
+            "count": 17069,
+            "rate": 562.2267087556381
+        },
+        "http_req_duration": {
+            "max": 138.632428,
+            "p(90)": 60.21533820000001,
+            "p(95)": 68.27845739999998,
+            "p(99)": 89.30329828,
+            "avg": 20.588845026785716,
+            "min": 0.80584,
+            "med": 13.9728805,
+            "thresholds": {
+                "p(95)<2000": false
+            }
+        },
+        "http_req_failed": {
+            "passes": 0,
+            "fails": 112,
+            "thresholds": {
+                "rate==0": false
+            },
+            "value": 0
+        },
+        "http_reqs": {
+            "count": 112,
+            "rate": 3.689108405919004
+        },
+        "data_received": {
+            "count": 141637,
+            "rate": 4665.30577936741
+        },
+        "iterations": {
+            "count": 28,
+            "rate": 0.922277101479751
+        },
+        "http_req_sending": {
+            "max": 0.289374,
+            "p(90)": 0.0786606,
+            "p(95)": 0.09934474999999997,
+            "p(99)": 0.22351967000000006,
+            "avg": 0.053201187499999976,
+            "min": 0.008777,
+            "med": 0.048063
+        },
+        "http_req_waiting": {
+            "p(90)": 60.02853670000002,
+            "p(95)": 68.09757244999999,
+            "p(99)": 88.99819662,
+            "avg": 20.38920303571428,
+            "min": 0.699982,
+            "med": 13.561991,
+            "max": 138.226443
+        },
+        "http_req_connecting": {
+            "p(99)": 0,
+            "avg": 0.007151982142857143,
+            "min": 0,
+            "med": 0,
+            "max": 0.801022,
+            "p(90)": 0,
+            "p(95)": 0
+        },
+        "http_req_duration{expected_response:true}": {
+            "med": 13.9728805,
+            "max": 138.632428,
+            "p(90)": 60.21533820000001,
+            "p(95)": 68.27845739999998,
+            "p(99)": 89.30329828,
+            "avg": 20.588845026785716,
+            "min": 0.80584
+        },
+        "vus_max": {
+            "min": 1,
+            "max": 1,
+            "value": 1
+        },
+        "vus": {
+            "value": 1,
+            "min": 1,
+            "max": 1
+        },
+        "checks": {
+            "passes": 140,
+            "fails": 0,
+            "thresholds": {
+                "rate==1": false
+            },
+            "value": 1
+        },
+        "http_req_blocked": {
+            "p(90)": 0.013611800000000009,
+            "p(95)": 0.01836374999999998,
+            "p(99)": 0.27478545000000015,
+            "avg": 0.04450542857142855,
+            "min": 0.002044,
+            "med": 0.0066095,
+            "max": 3.812953
+        }
+    }
+}
