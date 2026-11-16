@@ -10,6 +10,14 @@ de este equipo. La batería vigente está en `k6/evaluation/`.
 
 ## Requisitos e instalación
 
+En Windows puedes hacer doble clic en **`Iniciar_ReservaFlow.bat`**. Localiza
+Docker Desktop, lo abre si hace falta, inicia API y PostgreSQL, aplica los índices
+idempotentes de v2 y comprueba salud y disponibilidad antes de abrir el navegador.
+Conserva los datos existentes; la primera inicialización usa la semilla del proyecto.
+Guarda el diagnóstico en `logs/inicio-*.log`. Puedes cerrar la ventana al finalizar.
+Para ejecutarlo sin abrir navegador ni esperar Enter:
+`Iniciar_ReservaFlow.bat -SinNavegador -SinPausa`.
+
 - Windows con Docker Desktop funcionando (motor Linux y Docker Compose >=2.24.4).
 - Git. Node.js 22 para el automatizador; Node.js 20 de la API se instala en su imagen.
 - Internet para descargar imágenes y dependencias; las pruebas solo apuntan a la API local.
