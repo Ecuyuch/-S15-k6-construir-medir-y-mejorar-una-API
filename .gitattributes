@@ -1,0 +1,7 @@
+* text=auto eol=lf
+# Conservar los bytes y las huellas de los resultados originales.
+results/** -text
+output/** -text
+*.png -text
+*.docx -text
+*.gz -text

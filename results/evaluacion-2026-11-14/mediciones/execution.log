@@ -1,0 +1,33 @@
+2026-11-15T06:29:06.003Z INICIO v1-smoke
+2026-11-15T06:29:39.780Z FIN v1-smoke exit=0 duracion=32.3s
+2026-11-15T06:29:50.912Z INICIO v1-load-1-warmup
+2026-11-15T06:30:09.889Z FIN v1-load-1-warmup exit=0 duracion=17.5s
+2026-11-15T06:30:11.774Z INICIO v1-load-1
+2026-11-15T06:30:47.782Z FIN v1-load-1 exit=99 duracion=32.9s
+2026-11-15T06:31:17.872Z INICIO v2-smoke
+2026-11-15T06:31:51.687Z FIN v2-smoke exit=0 duracion=32.5s
+2026-11-15T06:32:03.786Z INICIO v2-load-1-warmup
+2026-11-15T06:32:22.377Z FIN v2-load-1-warmup exit=0 duracion=17.2s
+2026-11-15T06:32:24.251Z INICIO v2-load-1
+2026-11-15T06:34:28.025Z FIN v2-load-1 exit=0 duracion=122.4s
+2026-11-15T06:34:42.988Z INICIO v2-load-2-warmup
+2026-11-15T06:35:01.739Z FIN v2-load-2-warmup exit=0 duracion=17.3s
+2026-11-15T06:35:03.656Z INICIO v2-load-2
+2026-11-15T06:37:07.698Z FIN v2-load-2 exit=0 duracion=122.4s
+2026-11-15T06:37:27.663Z INICIO v1-load-2-warmup
+2026-11-15T06:37:46.207Z FIN v1-load-2-warmup exit=0 duracion=16.7s
+2026-11-15T06:37:48.637Z INICIO v1-load-2
+2026-11-15T06:38:25.940Z FIN v1-load-2 exit=99 duracion=33.3s
+2026-11-15T06:38:46.719Z INICIO v1-stress-warmup
+2026-11-15T06:39:05.738Z FIN v1-stress-warmup exit=0 duracion=17.3s
+2026-11-15T06:39:08.260Z PREFLIGHT: esperando al menos 500 MiB libres antes de v1-stress
+2026-11-15T06:39:48.337Z INICIO v1-stress
+2026-11-15T06:41:08.151Z FIN v1-stress exit=99 duracion=77.1s
+2026-11-15T06:41:08.748Z INICIO v1-recovery-safe
+2026-11-15T06:41:43.232Z FIN v1-recovery-safe exit=0 duracion=32.5s
+2026-11-15T06:42:10.714Z PREFLIGHT: esperando al menos 500 MiB libres antes de v2-stress-warmup
+2026-11-15T06:42:15.723Z INICIO v2-stress-warmup
+2026-11-15T06:42:35.370Z FIN v2-stress-warmup exit=0 duracion=17.6s
+2026-11-15T06:42:37.964Z INICIO v2-stress
+2026-11-15T06:45:41.767Z FIN v2-stress exit=0 duracion=181.6s
+2026-11-15T06:46:32.913Z EVALUACION COMPLETA

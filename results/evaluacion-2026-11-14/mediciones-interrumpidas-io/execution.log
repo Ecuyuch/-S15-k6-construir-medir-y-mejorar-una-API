@@ -1,0 +1,14 @@
+2026-11-15T06:18:50.768Z PREFLIGHT INICIAL: esperar reclamación de memoria WSL antes de preparar datos
+2026-11-15T06:19:48.290Z INICIO v1-smoke
+2026-11-15T06:20:22.678Z FIN v1-smoke exit=0 duracion=32.3s
+2026-11-15T06:20:42.451Z INICIO v1-load-1-warmup
+2026-11-15T06:21:05.191Z FIN v1-load-1-warmup exit=0 duracion=17.2s
+2026-11-15T06:21:07.386Z INICIO v1-load-1
+2026-11-15T06:21:43.651Z FIN v1-load-1 exit=99 duracion=33.1s
+2026-11-15T06:22:31.422Z INICIO v2-smoke
+2026-11-15T06:23:05.497Z FIN v2-smoke exit=0 duracion=32.5s
+2026-11-15T06:23:23.173Z PREFLIGHT: esperando al menos 500 MiB libres antes de v2-load-1-warmup
+2026-11-15T06:23:38.196Z INICIO v2-load-1-warmup
+2026-11-15T06:23:56.901Z FIN v2-load-1-warmup exit=0 duracion=17.2s
+2026-11-15T06:23:58.849Z INICIO v2-load-1
+2026-11-15T06:25:23.262Z FIN v2-load-1 exit=105 duracion=82.9s

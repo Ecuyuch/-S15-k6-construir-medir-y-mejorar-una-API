@@ -1,0 +1,6 @@
+2026-11-15T06:02:40.144Z PREFLIGHT: esperando al menos 900 MiB libres antes de v1-smoke
+2026-11-15T06:04:36.272Z PREFLIGHT INICIAL: esperar reclamación de memoria WSL antes de preparar datos
+2026-11-15T06:05:37.869Z PREFLIGHT: esperando al menos 900 MiB libres antes de v1-smoke
+2026-11-15T06:06:37.971Z INICIO v1-smoke
+2026-11-15T06:07:11.543Z FIN v1-smoke exit=0 duracion=32.0s
+2026-11-15T06:07:25.340Z PREFLIGHT: esperando al menos 900 MiB libres antes de v1-load-1-warmup

@@ -29,9 +29,9 @@ __pycache__/
 tmp/
 results/**/*.dump
 output/qa/
-!results/**/*.log
 
 # Logs temporales
 logs/
 *.log
+!results/**/*.log
 
